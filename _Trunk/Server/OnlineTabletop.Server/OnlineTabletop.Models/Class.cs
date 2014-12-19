@@ -11,6 +11,10 @@ namespace OnlineTabletop.Models
 
         public int HitDice { get; set; }
 
+        public int FortitudeBaseSave { get; set; }
+
+        public int Level { get; set; }
+
         public Class()
         {
 

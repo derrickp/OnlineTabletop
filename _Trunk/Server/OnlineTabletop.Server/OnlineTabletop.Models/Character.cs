@@ -103,7 +103,12 @@ namespace OnlineTabletop.Models
         /// <returns>Integer for character level</returns>
         public int CharacterLevel()
         {
-            return Classes.Count;
+            int level = 0;
+            foreach (Class charClass in Classes)
+            {
+                level += charClass.Level;
+            }
+            return level;
         }
 
         /// <summary>
