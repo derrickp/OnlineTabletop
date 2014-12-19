@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace OnlineTabletop.Server.Models
+namespace OnlineTabletop.Models
 {
     public class Player
     {
@@ -12,6 +12,8 @@ namespace OnlineTabletop.Server.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Hash { get; set; }
+
+        public DateTime JoinDate { get; set; }
 
         public List<Character> Characters { get; set; }
 

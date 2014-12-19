@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.Server", "OnlineTabletop.Server\OnlineTabletop.Server.csproj", "{3A068E8D-8187-4BA3-B70B-A9456B5BB9A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.Models", "OnlineTabletop.Models\OnlineTabletop.Models.csproj", "{6F6B0FAA-3168-4A9D-AB02-A23EE1C0FBF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3A068E8D-8187-4BA3-B70B-A9456B5BB9A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A068E8D-8187-4BA3-B70B-A9456B5BB9A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A068E8D-8187-4BA3-B70B-A9456B5BB9A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F6B0FAA-3168-4A9D-AB02-A23EE1C0FBF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F6B0FAA-3168-4A9D-AB02-A23EE1C0FBF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F6B0FAA-3168-4A9D-AB02-A23EE1C0FBF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F6B0FAA-3168-4A9D-AB02-A23EE1C0FBF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
