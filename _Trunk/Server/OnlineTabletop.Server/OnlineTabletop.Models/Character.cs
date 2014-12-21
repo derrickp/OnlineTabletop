@@ -52,7 +52,59 @@ namespace OnlineTabletop.Models
         public int NonLethalDamage { get; set; }
 
         public int BaseMovementSpeed { get; set; }
-        public int BaseAttackBonus { get; set; }
+        public int BaseAttackBonus {
+            get
+            {
+                int attackBonus = 0;
+                foreach (RPGClass charClass in Classes)
+                {
+                    attackBonus += charClass.BaseAttack;
+                }
+                return attackBonus;
+            }
+        }
+
+        public int FortitudeBaseSave
+        {
+            get
+            {
+                int save = 0;
+                foreach (RPGClass charClass in Classes)
+                {
+                    save += charClass.FortitudeBaseSave;
+                }
+                // Need to find some way to add in other random modifiers.
+                save += Constitution.Modifier; 
+                return save;
+            }
+        }
+        public int ReflexBaseSave 
+        { 
+            get 
+            {
+                int save = 0;
+                foreach (RPGClass charClass in Classes) 
+                {
+                    save += charClass.ReflexBaseSave;
+                }
+                save += Dexterity.Modifier;
+                return save;
+            } 
+        }
+        public int WillBaseSave
+        { 
+            get 
+            {
+                int save = 0;
+
+                foreach (RPGClass charClass in Classes)
+                {
+                    save += charClass.WillBaseSave;
+                }
+                save += Wisdom.Modifier;
+                return save;
+            }
+        }
 
         public int CMB
         {
@@ -72,7 +124,7 @@ namespace OnlineTabletop.Models
 
         public List<string> KnownLanguages { get; set; }
 
-        public List<Class> Classes { get; set; }
+        public List<RPGClass> Classes { get; set; }
 
         /// <summary>
         /// The Player that this character belongs to.
@@ -104,7 +156,7 @@ namespace OnlineTabletop.Models
         public int CharacterLevel()
         {
             int level = 0;
-            foreach (Class charClass in Classes)
+            foreach (RPGClass charClass in Classes)
             {
                 level += charClass.Level;
             }
@@ -116,7 +168,7 @@ namespace OnlineTabletop.Models
         /// </summary>
         /// <param name="inClass">The class to check</param>
         /// <returns>Integer of specified class level</returns>
-        public int ClassLevel(Class inClass)
+        public int ClassLevel(RPGClass inClass)
         {
             return Classes.Count(x => x.Name == inClass.Name);
         }

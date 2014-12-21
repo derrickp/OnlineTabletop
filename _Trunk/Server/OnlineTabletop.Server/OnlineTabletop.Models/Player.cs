@@ -7,7 +7,7 @@ namespace OnlineTabletop.Models
 {
     public class Player
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
         public string Email { get; set; }
@@ -19,7 +19,7 @@ namespace OnlineTabletop.Models
 
         public Player()
         {
-
+            Id = Guid.NewGuid().ToString("N");
         }
     }
 }

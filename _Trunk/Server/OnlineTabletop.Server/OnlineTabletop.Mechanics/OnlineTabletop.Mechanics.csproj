@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6F6B0FAA-3168-4A9D-AB02-A23EE1C0FBF8}</ProjectGuid>
+    <ProjectGuid>{212E1E94-C39F-483F-9E5A-D0BE1792F06A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OnlineTabletop.Models</RootNamespace>
-    <AssemblyName>OnlineTabletop.Models</AssemblyName>
+    <RootNamespace>OnlineTabletop.Mechanics</RootNamespace>
+    <AssemblyName>OnlineTabletop.Mechanics</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,15 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ability.cs" />
-    <Compile Include="Alignments.cs" />
-    <Compile Include="Character.cs" />
-    <Compile Include="RPGClass.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Race.cs" />
-    <Compile Include="Room.cs" />
-    <Compile Include="Size.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
