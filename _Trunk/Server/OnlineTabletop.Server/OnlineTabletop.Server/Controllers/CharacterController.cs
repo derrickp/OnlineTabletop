@@ -54,10 +54,14 @@ namespace OnlineTabletop.Server.Controllers
                         characterLevel = character.CharacterLevel(),
                         race = "elf"
                     };
-                    basicChar.classes = new Dictionary<string, int>();
+                    basicChar.classes = new List<BasicRPGClassDTO>();
                     foreach (RPGClass rpgClass in character.Classes)
                     {
-                        basicChar.classes[rpgClass.Name] = rpgClass.Level;
+                        basicChar.classes.Add(new BasicRPGClassDTO
+                        {
+                            name = rpgClass.Name,
+                            level = rpgClass.Level
+                        });
                     }
                     characterDTOs.Add(basicChar);
                 }

@@ -12,7 +12,7 @@ namespace OnlineTabletop.DTOs
 
         public string playerName { get; set; }
 
-        public Dictionary<string, int> classes { get; set; }
+        public List<BasicRPGClassDTO> classes { get; set; }
 
         public string race { get; set; }
 

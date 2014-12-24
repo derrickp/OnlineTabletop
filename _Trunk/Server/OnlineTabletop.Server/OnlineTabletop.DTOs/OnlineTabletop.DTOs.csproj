@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="BasicCharacterDTO.cs" />
     <Compile Include="BasicPlayerDTO.cs" />
+    <Compile Include="BasicRPGClassDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
