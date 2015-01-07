@@ -7,7 +7,7 @@ namespace OnlineTabletop.Models
 {
     public class Character
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 

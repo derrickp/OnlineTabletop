@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RollsDTO.cs" />
     <Compile Include="BasicCharacterDTO.cs" />
     <Compile Include="BasicPlayerDTO.cs" />
     <Compile Include="BasicRPGClassDTO.cs" />

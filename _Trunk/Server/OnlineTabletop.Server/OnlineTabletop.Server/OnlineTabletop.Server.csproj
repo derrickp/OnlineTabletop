@@ -85,6 +85,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\RollController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -111,6 +112,10 @@
     <ProjectReference Include="..\OnlineTabletop.Models\OnlineTabletop.Models.csproj">
       <Project>{6f6b0faa-3168-4a9d-ab02-a23ee1c0fbf8}</Project>
       <Name>OnlineTabletop.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineTabletop.Util\OnlineTabletop.Util.csproj">
+      <Project>{9316a195-ad4b-4270-a675-93a2593da31d}</Project>
+      <Name>OnlineTabletop.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -8,6 +8,8 @@ namespace OnlineTabletop.DTOs
 {
     public class BasicCharacterDTO
     {
+        public string id { get; set; }
+
         public string name { get; set; }
 
         public string playerName { get; set; }
