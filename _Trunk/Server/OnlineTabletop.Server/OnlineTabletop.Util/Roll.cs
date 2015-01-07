@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
+using MathNet.Numerics.Random;
 
 namespace OnlineTabletop.Util
 {
@@ -31,11 +32,12 @@ namespace OnlineTabletop.Util
         /// <returns>A random number generator.</returns>
         public static Random CreateDefaultRng()
         {
-            // Initialize with a true random seed, instead of the current time.
+            //// Initialize with a true random seed, instead of the current time.
             var secureRng = new RNGCryptoServiceProvider();
             byte[] seed = new byte[4];
             secureRng.GetBytes(seed);
-            return new Random(BitConverter.ToInt32(seed, 0));
+
+            return new MersenneTwister(BitConverter.ToInt32(seed, 0));
         }
 
         /// <summary>
@@ -47,11 +49,44 @@ namespace OnlineTabletop.Util
         }
 
         /// <summary>
+        /// Gets the result of rolling N 100-sided die.
+        /// </summary>
+        public static int d100(int n)
+        {
+            return GenerateResult(100, n);
+        }
+
+        /// <summary>
         /// Gets the result of rolling a 20-sided die.
         /// </summary>
         public static int d20()
         {
             return GenerateResult(20, 1);
+        }
+
+        /// <summary>
+        /// Gets the result of rolling N 20-sided die.
+        /// </summary>
+        public static int d20(int n)
+        {
+            return GenerateResult(20, n);
+        }
+
+        /// <summary>
+        /// Gets the result of rolling a 12-sided die.
+        /// </summary>
+        public static int d12()
+        {
+            return GenerateResult(12, 1);
+        }
+
+        /// <summary>
+        /// Gets the combined result of rolling N 12-sided dice.
+        /// </summary>
+        /// <param name="n">The number of dice.</param>
+        public static int d12(int n)
+        {
+            return GenerateResult(12, n);
         }
 
         /// <summary>
