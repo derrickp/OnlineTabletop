@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.Util", "Onli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.DTOs", "OnlineTabletop.DTOs\OnlineTabletop.DTOs.csproj", "{6440DDC7-6F7B-40D9-8E73-877E739E4AFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.Persistence", "OnlineTabletop.Persistence\OnlineTabletop.Persistence.csproj", "{1D4F1B34-352C-44C7-884E-23C21EF59535}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6440DDC7-6F7B-40D9-8E73-877E739E4AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6440DDC7-6F7B-40D9-8E73-877E739E4AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6440DDC7-6F7B-40D9-8E73-877E739E4AFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D4F1B34-352C-44C7-884E-23C21EF59535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D4F1B34-352C-44C7-884E-23C21EF59535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D4F1B34-352C-44C7-884E-23C21EF59535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D4F1B34-352C-44C7-884E-23C21EF59535}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

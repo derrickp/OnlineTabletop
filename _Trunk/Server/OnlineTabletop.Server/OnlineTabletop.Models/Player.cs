@@ -5,21 +5,21 @@ using System.Web;
 
 namespace OnlineTabletop.Models
 {
-    public class Player
+    public class Player: IEntity
     {
-        public string Id { get; set; }
+        public string _id { get; set; }
 
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Hash { get; set; }
+        public string name { get; set; }
+        public string email { get; set; }
+        public string hash { get; set; }
 
-        public DateTime JoinDate { get; set; }
+        public DateTime joinDate { get; set; }
 
-        public List<Character> Characters { get; set; }
+        public List<Character> characters { get; set; }
 
         public Player()
         {
-            Id = Guid.NewGuid().ToString("N");
+            _id = Guid.NewGuid().ToString("N");
         }
     }
 }

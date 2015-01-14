@@ -5,9 +5,9 @@ using System.Web;
 
 namespace OnlineTabletop.Models
 {
-    public class Character
+    public class Character: IEntity
     {
-        public string Id { get; set; }
+        public string _id { get; set; }
 
         public string Name { get; set; }
 
@@ -52,7 +52,8 @@ namespace OnlineTabletop.Models
         public int NonLethalDamage { get; set; }
 
         public int BaseMovementSpeed { get; set; }
-        public int BaseAttackBonus {
+        public int BaseAttackBonus 
+        {
             get
             {
                 int attackBonus = 0;

@@ -16,16 +16,12 @@ namespace OnlineTabletop.Server.Controllers
         public static List<Player> players = new List<Player>
         {
             new Player(){
-                Name = "Derrick",
-                Email = "derrickplotsky@gmail.com"
+                name = "Derrick",
+                email = "derrickplotsky@gmail.com"
             }
         };
 
-        //// GET: api/Player
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        IRepository<Player> _playerRepository { get; set; }
 
         // GET: api/Player/5
         [Route("playerinfo/{playerId}")]
@@ -34,13 +30,14 @@ namespace OnlineTabletop.Server.Controllers
         [EnableCors("*", "*", "GET")]
         public IHttpActionResult Get(string playerId)
         {
-            Player player = players.FirstOrDefault();
+            
+            Player player = _playerRepository.Get(playerId);
             if (player != null)
             {
                 BasicPlayerDTO playerDto = new BasicPlayerDTO(){
-                    id = player.Id,
-                    name = player.Name,
-                    email = player.Email
+                    id = player._id,
+                    name = player.name,
+                    email = player.email
                 };
                 return Ok(playerDto);
             }
@@ -52,8 +49,24 @@ namespace OnlineTabletop.Server.Controllers
         }
 
         // POST: api/Player
-        public void Post([FromBody]string value)
+        [HttpPost]
+        [Route("player")]
+        public IHttpActionResult Post([FromBody]BasicPlayerDTO playerDTO)
         {
+            if (ModelState.IsValid)
+            {
+                Player player = new Player()
+                {
+                    name = playerDTO.name,
+                    email = playerDTO.email
+                };
+
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // PUT: api/Player/5
@@ -64,6 +77,11 @@ namespace OnlineTabletop.Server.Controllers
         // DELETE: api/Player/5
         public void Delete(int id)
         {
+        }
+
+        public PlayerController(IRepository<Player> playerRepository)
+        {
+            this._playerRepository = playerRepository;
         }
     }
 }

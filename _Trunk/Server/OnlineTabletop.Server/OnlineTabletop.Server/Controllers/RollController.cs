@@ -25,30 +25,65 @@ namespace OnlineTabletop.Server.Controllers
             switch (diceType)
             {
                 case "d4":
-                    rolls.diceRolls["d4"] = Roll.d4(numDice);
+                    rolls.diceRolls["d4"] = new List<int>();
+                    for (int i = 0; i < numDice; i++)
+                    {
+                        rolls.diceRolls["d4"].Add(Roll.d4());
+                    }
                     break;
                 case "d6":
-                    rolls.diceRolls["d6"] = Roll.d6(numDice);
+                    rolls.diceRolls["d6"] = new List<int>();
+                    for (int i = 0; i < numDice; i++)
+                    {
+                        rolls.diceRolls["d6"].Add(Roll.d6());
+                    }
                     break;
                 case "d10":
-                    rolls.diceRolls["d10"] = Roll.d10(numDice);
+                    rolls.diceRolls["d10"] = new List<int>();
+                    for (int i = 0; i < numDice; i++)
+                    {
+                        rolls.diceRolls["d10"].Add(Roll.d10());
+                    }
                     break;
                 case "d12":
-                    rolls.diceRolls["d12"] = Roll.d12(numDice);
+                    rolls.diceRolls["d12"] = new List<int>();
+                    for (int i = 0; i < numDice; i++)
+                    {
+                        rolls.diceRolls["d12"].Add(Roll.d12());
+                    }
                     break;
                 case "d20":
-                    rolls.diceRolls["d20"] = Roll.d20(numDice);
+                    rolls.diceRolls["d20"] = new List<int>();
+                    for (int i = 0; i < numDice; i++)
+                    {
+                        rolls.diceRolls["d20"].Add(Roll.d20());
+                    }
                     break;
                 case "d100":
-                    rolls.diceRolls["d100"] = Roll.d100(numDice);
+                    rolls.diceRolls["d100"] = new List<int>();
+                    for (int i = 0; i < numDice; i++)
+                    {
+                        rolls.diceRolls["d100"].Add(Roll.d100());
+                    }
                     break;
                 default:
-                    rolls.diceRolls["d4"] = Roll.d4(numDice);
-                    rolls.diceRolls["d6"] = Roll.d6(numDice);
-                    rolls.diceRolls["d10"] = Roll.d10(numDice);
-                    rolls.diceRolls["d12"] = Roll.d12(numDice);
-                    rolls.diceRolls["d20"] = Roll.d20(numDice);
-                    rolls.diceRolls["d100"] = Roll.d100(numDice);
+                    rolls.diceRolls["d4"] = new List<int>();
+                    rolls.diceRolls["d6"] = new List<int>();
+                    rolls.diceRolls["d8"] = new List<int>();
+                    rolls.diceRolls["d10"] = new List<int>();
+                    rolls.diceRolls["d12"] = new List<int>();
+                    rolls.diceRolls["d20"] = new List<int>();
+                    rolls.diceRolls["d100"] = new List<int>();
+                    for (int i = 0; i < numDice; i++)
+                    {
+                        rolls.diceRolls["d4"].Add(Roll.d4());
+                        rolls.diceRolls["d6"].Add(Roll.d6());
+                        rolls.diceRolls["d8"].Add(Roll.d8());
+                        rolls.diceRolls["d10"].Add(Roll.d10());
+                        rolls.diceRolls["d12"].Add(Roll.d12());
+                        rolls.diceRolls["d20"].Add(Roll.d20());
+                        rolls.diceRolls["d100"].Add(Roll.d100());
+                    }
                     break;
             }
             return rolls;

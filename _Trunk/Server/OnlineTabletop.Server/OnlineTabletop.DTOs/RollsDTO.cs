@@ -8,11 +8,11 @@ namespace OnlineTabletop.DTOs
 {
     public class RollsDTO
     {
-        public IDictionary<string, int> diceRolls { get; set; }
+        public IDictionary<string, List<int>> diceRolls { get; set; }
 
         public RollsDTO()
         {
-            diceRolls = new Dictionary<string, int>();
+            diceRolls = new Dictionary<string, List<int>>();
         }
     }
 }

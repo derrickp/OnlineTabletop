@@ -16,11 +16,11 @@ namespace OnlineTabletop.Server.Controllers
         public static List<Player> players = new List<Player>
         {
             new Player(){
-                Name = "Derrick",
-                Email = "derrickplotsky@gmail.com",
-                Characters = new List<Character> {
+                name = "Derrick",
+                email = "derrickplotsky@gmail.com",
+                characters = new List<Character> {
                     new Character() {
-                        Id = "TestChar",
+                        _id = "TestChar",
                         Name = "RazzleMan",
                         Classes = new List<RPGClass> {
                             new RPGClass() {
@@ -46,12 +46,12 @@ namespace OnlineTabletop.Server.Controllers
             Player player = players.FirstOrDefault();
             if (player != null)
             {
-                foreach (Character character in player.Characters)
+                foreach (Character character in player.characters)
                 {
                     BasicCharacterDTO basicChar = new BasicCharacterDTO()
                     {
                         name = character.Name,
-                        playerName = player.Name,
+                        playerName = player.name,
                         characterLevel = character.CharacterLevel(),
                         race = "elf"
                     };
@@ -80,7 +80,7 @@ namespace OnlineTabletop.Server.Controllers
 
             if (player != null)
             {
-                Character character = player.Characters.FirstOrDefault(x => x.Id == characterId);
+                Character character = player.characters.FirstOrDefault(x => x._id == characterId);
                 if (character != null)
                 {
                     if (detaillevel == "basic")
@@ -88,7 +88,7 @@ namespace OnlineTabletop.Server.Controllers
                         BasicCharacterDTO basicChar = new BasicCharacterDTO()
                         {
                             name = character.Name,
-                            playerName = player.Name,
+                            playerName = player.name,
                             characterLevel = character.CharacterLevel(),
                             race = "elf"
                         };

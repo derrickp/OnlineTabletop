@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -11,6 +13,7 @@ namespace OnlineTabletop.Server
         {
             // Web API configuration and services
 
+            
             // Web API routes
             config.MapHttpAttributeRoutes();
 

@@ -36,7 +36,7 @@ namespace OnlineTabletop.Util
             var secureRng = new RNGCryptoServiceProvider();
             byte[] seed = new byte[4];
             secureRng.GetBytes(seed);
-
+            
             return new MersenneTwister(BitConverter.ToInt32(seed, 0));
         }
 
