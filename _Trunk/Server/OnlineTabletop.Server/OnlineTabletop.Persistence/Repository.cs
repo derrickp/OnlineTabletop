@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using OnlineTabletop.Models;
 using MongoDB.Driver;
 using MongoDB.Bson;
-using Newtonsoft.Json;
 using MongoDB.Bson.IO;
+using System.Reflection;
+using MongoDB.Bson.Serialization;
 
 namespace OnlineTabletop.Persistence
 {
@@ -29,13 +30,13 @@ namespace OnlineTabletop.Persistence
             var collection = client.GetServer().GetDatabase("tabletop").GetCollection(collectionName);
 
             var temp = collection.FindOneById(new ObjectId(id));
-            
-            //var jsonWriterSettings = new JsonWriterSettings();
-            
-            //jsonWriterSettings.OutputMode = JsonOutputMode.Strict;
-            //jsonWriterSettings.GuidRepresentation = GuidRepresentation.Standard;
-            //string json = temp.ToJson(jsonWriterSettings);
-            //T returnVal = JsonConvert.DeserializeObject<T>(temp.ToJson());
+            BsonClassMap.RegisterClassMap<T>(cm =>
+            {
+                cm.AutoMap();
+                cm.IdMemberMap.SetRepresentation(BsonType.ObjectId);
+            });
+
+            T returnVal = BsonSerializer.Deserialize<T>(temp);
 
             throw new NotImplementedException();
         }
