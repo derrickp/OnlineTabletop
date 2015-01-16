@@ -12,11 +12,11 @@ using MongoDB.Bson.Serialization;
 
 namespace OnlineTabletop.Persistence
 {
-    public class Repository<T>: IRepository<T>
+    public abstract class Repository<T>: IRepository<T>
         where T:IEntity
     {
 
-        MongoClient client { get; set; }
+        public MongoClient client { get; set; }
 
         public Repository(MongoClient client)
         {
@@ -25,35 +25,32 @@ namespace OnlineTabletop.Persistence
 
         public T Get(string id)
         {
-            var typeParameter = typeof(T);
-            var collectionName = typeParameter.Name.ToLowerInvariant();
-            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(collectionName);
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
 
-            var temp = collection.FindOneById(new ObjectId(id));
-            BsonClassMap.RegisterClassMap<T>(cm =>
+            var bsonDoc = collection.FindOneById(new ObjectId(id));
+            if (bsonDoc != null)
             {
-                cm.AutoMap();
-                cm.IdMemberMap.SetRepresentation(BsonType.ObjectId);
-            });
+                RegisterMongoClassMaps();
+                T returnVal = BsonSerializer.Deserialize<T>(bsonDoc);
 
-            T returnVal = BsonSerializer.Deserialize<T>(temp);
-
-            throw new NotImplementedException();
+                return returnVal;
+            }
+            return default(T);
         }
 
-        public void Add(T item)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Add(T item);
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
+            collection.RemoveAll();
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
+            var bsonDoc = collection.FindOneById(new ObjectId(item._id));
+            return bsonDoc != null;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -65,32 +62,44 @@ namespace OnlineTabletop.Persistence
         {
             get 
             {
-                var typeParameter = typeof(T);
-                var collectionName = typeParameter.Name.ToLowerInvariant();
-                var collection = client.GetServer().GetDatabase("tabletop").GetCollection(collectionName);
-                
+                var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
                 return Convert.ToInt32(collection.Count());
             }
         }
 
         public bool IsReadOnly
         {
-            get { throw new NotImplementedException(); }
+            get { return true; }
         }
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
+            
+            return false;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
+            RegisterMongoClassMaps();
+            return (IEnumerator<T>)collection.FindAll().Select(bs => BsonSerializer.Deserialize<T>(bs));
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        internal void RegisterMongoClassMaps()
+        {
+            // Register the way to deserialize the class using the Mongo Deserializer
+            // Setting the representation of the ObjectId to become a string.
+            BsonClassMap.RegisterClassMap<T>(cm =>
+            {
+                cm.AutoMap();
+                cm.IdMemberMap.SetRepresentation(BsonType.ObjectId);
+            });
         }
     }
 }

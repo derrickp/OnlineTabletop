@@ -21,7 +21,7 @@ namespace OnlineTabletop.Server.Controllers
             }
         };
 
-        IRepository<Player> _playerRepository { get; set; }
+        IPlayerRepository<Player> _playerRepository { get; set; }
 
         // GET: api/Player/5
         [Route("playerinfo/{playerId}")]
@@ -60,7 +60,7 @@ namespace OnlineTabletop.Server.Controllers
                     name = playerDTO.name,
                     email = playerDTO.email
                 };
-
+                _playerRepository.Add(player);
                 return Ok();
             }
             else
@@ -79,7 +79,7 @@ namespace OnlineTabletop.Server.Controllers
         {
         }
 
-        public PlayerController(IRepository<Player> playerRepository)
+        public PlayerController(IPlayerRepository<Player> playerRepository)
         {
             this._playerRepository = playerRepository;
         }

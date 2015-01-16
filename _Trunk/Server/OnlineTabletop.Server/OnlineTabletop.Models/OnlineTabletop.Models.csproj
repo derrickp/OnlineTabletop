@@ -43,6 +43,7 @@
     <Compile Include="Alignments.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="IPlayerRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="RPGClass.cs" />
     <Compile Include="Player.cs" />

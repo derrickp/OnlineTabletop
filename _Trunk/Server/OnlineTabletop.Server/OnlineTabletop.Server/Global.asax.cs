@@ -19,14 +19,14 @@ namespace OnlineTabletop.Server
         {
             var builder = new ContainerBuilder();
 
-            //builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerRequest();
-
             // Get your HttpConfiguration.
             var config = GlobalConfiguration.Configuration;
 
             var connectionString = "mongodb://localhost";
 
-            builder.Register(c => new Repository<Player>(new MongoClient(connectionString))).As<IRepository<Player>>().InstancePerRequest();
+            //builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerRequest().WithParameter("client", new MongoClient(connectionString));
+            //builder.Register(c => new Repository<Player>(new MongoClient(connectionString))).As<IRepository<Player>>().InstancePerRequest();
+            builder.Register(c => new PlayerRepository(new MongoClient(connectionString))).As<IPlayerRepository<Player>>().InstancePerRequest();
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
