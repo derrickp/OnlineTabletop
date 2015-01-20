@@ -42,6 +42,7 @@
     <Compile Include="Ability.cs" />
     <Compile Include="Alignments.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="ICharacterRepository.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IPlayerRepository.cs" />
     <Compile Include="IRepository.cs" />

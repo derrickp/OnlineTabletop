@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterRepository.cs" />
     <Compile Include="MongoUtilities.cs" />
     <Compile Include="PlayerRepository.cs" />
     <Compile Include="Repository.cs" />
