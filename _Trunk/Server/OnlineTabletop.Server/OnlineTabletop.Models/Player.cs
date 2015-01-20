@@ -13,7 +13,7 @@ namespace OnlineTabletop.Models
 
         //public DateTime joinDate { get; set; }
 
-        public List<Character> characters { get; set; }
+        public List<string> characterIds { get; set; }
 
         public Player()
         {

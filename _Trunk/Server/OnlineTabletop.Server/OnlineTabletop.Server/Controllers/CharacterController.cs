@@ -13,25 +13,6 @@ namespace OnlineTabletop.Server.Controllers
 {
     public class CharacterController : ApiController
     {
-        public static List<Player> players = new List<Player>
-        {
-            new Player(){
-                name = "Derrick",
-                email = "derrickplotsky@gmail.com",
-                characters = new List<Character> {
-                    new Character() {
-                        _id = "TestChar",
-                        Name = "RazzleMan",
-                        Classes = new List<RPGClass> {
-                            new RPGClass() {
-                                Name = "Barbarian",
-                                Level = 1
-                            }
-                        }
-                    }
-                }
-            }
-        };
 
         // GET: api/characters
         // Get the characters belonging to a certain player.
@@ -43,16 +24,17 @@ namespace OnlineTabletop.Server.Controllers
         {
             List<BasicCharacterDTO> characterDTOs = new List<BasicCharacterDTO>();
 
-            Player player = players.FirstOrDefault();
+            Player player = new Player();
             if (player != null)
             {
-                foreach (Character character in player.characters)
+                foreach (string characterId in player.characterIds)
                 {
+                    var character = new Character();
                     BasicCharacterDTO basicChar = new BasicCharacterDTO()
                     {
                         name = character.Name,
                         playerName = player.name,
-                        characterLevel = character.CharacterLevel(),
+                        characterLevel = character.GetCharacterLevel(),
                         race = "elf"
                     };
                     basicChar.classes = new List<BasicRPGClassDTO>();
@@ -71,42 +53,38 @@ namespace OnlineTabletop.Server.Controllers
         }
 
         // GET: api/playerId/characterId/5
-        [Route("player/{playerId}/characters/{detaillevel}/{characterId}")]
-        public BasicCharacterDTO Get(string playerId, string characterId, string detaillevel)
+        [Route("player/{playerId}/characters/{characterId}")]
+        public FullCharacterDTO Get(string playerId, string characterId)
         {
-            Player player = players.FirstOrDefault();
+            Player player = new Player();
 
             var resp = new HttpResponseMessage();
 
             if (player != null)
             {
-                Character character = player.characters.FirstOrDefault(x => x._id == characterId);
+                var character = new Character();
                 if (character != null)
                 {
-                    if (detaillevel == "basic")
+                    //if (detaillevel == "basic")
                     {
-                        BasicCharacterDTO basicChar = new BasicCharacterDTO()
+                        FullCharacterDTO fullCharacterDTO = new FullCharacterDTO()
                         {
-                            name = character.Name,
-                            playerName = player.name,
-                            characterLevel = character.CharacterLevel(),
+                            name = "Crazy Name",
+                            playerName = "Derrick",
+                            characterLevel = 1,
                             race = "elf"
                         };
-                        basicChar.classes = new List<BasicRPGClassDTO>();
+                        fullCharacterDTO.classes = new List<BasicRPGClassDTO>();
                         foreach (RPGClass rpgClass in character.Classes)
                         {
-                            basicChar.classes.Add(new BasicRPGClassDTO
+                            fullCharacterDTO.classes.Add(new BasicRPGClassDTO
                             {
                                 name = rpgClass.Name,
                                 level = rpgClass.Level
                             });
                         }
-                        return basicChar;
+                        return fullCharacterDTO;
                     }
-                    resp.StatusCode = HttpStatusCode.NotImplemented;
-                    resp.Content = new StringContent("Level of detail not implemented.");
-                    resp.ReasonPhrase = "Level Of Detail Not Implemented";
-                    throw new HttpResponseException(resp);
                 }
                 resp.StatusCode = HttpStatusCode.NotFound;
                 resp.Content = new StringContent(string.Format("Character not found with Id = {0}", characterId));
@@ -121,9 +99,17 @@ namespace OnlineTabletop.Server.Controllers
 
         // POST: api/Character
         [Route("player/{playerId}/character")]
-        public void Post([FromBody]BasicCharacterDTO basicCharacter, string playerId)
+        public IHttpActionResult Post([FromBody]FullCharacterDTO basicCharacter, string playerId)
         {
-
+            if (ModelState.IsValid)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+            
         }
 
         // PUT: api/Character/5
@@ -134,6 +120,11 @@ namespace OnlineTabletop.Server.Controllers
         // DELETE: api/Character/5
         public void Delete(int id)
         {
+        }
+
+        public CharacterController(IPlayerRepository<Player> playerRepository)
+        {
+            //this._playerRepository = playerRepository;
         }
     }
 }

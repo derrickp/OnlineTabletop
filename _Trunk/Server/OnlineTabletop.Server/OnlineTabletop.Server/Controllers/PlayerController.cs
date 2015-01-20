@@ -8,19 +8,12 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
 
 namespace OnlineTabletop.Server.Controllers
 {
     public class PlayerController : ApiController
     {
-        public static List<Player> players = new List<Player>
-        {
-            new Player(){
-                name = "Derrick",
-                email = "derrickplotsky@gmail.com"
-            }
-        };
-
         IPlayerRepository<Player> _playerRepository { get; set; }
 
         // GET: api/Player/5
@@ -55,13 +48,36 @@ namespace OnlineTabletop.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                Player player = new Player()
+                var player = _playerRepository.GetByEmail(playerDTO.email);
+                if (player != null)
+                {
+                    return Conflict();
+                }
+                player = new Player()
                 {
                     name = playerDTO.name,
                     email = playerDTO.email
                 };
-                _playerRepository.Add(player);
-                return Ok();
+                try
+                {
+                    _playerRepository.Add(player);
+                    player = _playerRepository.GetByEmail(player.email);
+                    if (player != null)
+                    {
+                        return Ok(new BasicPlayerDTO()
+                        {
+                            id = player._id,
+                            name = player.name,
+                            email = player.email
+                        });
+                    }
+                    // For some reason the player got added to the repository fine, but we were unable to get the player back from the repository.
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             else
             {
@@ -70,12 +86,12 @@ namespace OnlineTabletop.Server.Controllers
         }
 
         // PUT: api/Player/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(string id, [FromBody]BasicPlayerDTO playerDTO)
         {
         }
 
         // DELETE: api/Player/5
-        public void Delete(int id)
+        public void Delete(string id)
         {
         }
 

@@ -7,27 +7,12 @@ namespace OnlineTabletop.Models
 {
     public class Character: IEntity
     {
+        #region Properties
         public string _id { get; set; }
 
         public string Name { get; set; }
 
-        public Race Race { 
-            get
-            {
-                return Race;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    Race = value;
-                    if (Size == null)
-                    {
-                        Size = Race.Size;
-                    }
-                }
-            }
-        }
+        public Race Race { get; set; }
 
         public double Weight { get; set; }
         public double Height { get; set; }
@@ -52,76 +37,6 @@ namespace OnlineTabletop.Models
         public int NonLethalDamage { get; set; }
 
         public int BaseMovementSpeed { get; set; }
-        public int BaseAttackBonus 
-        {
-            get
-            {
-                int attackBonus = 0;
-                foreach (RPGClass charClass in Classes)
-                {
-                    attackBonus += charClass.BaseAttack;
-                }
-                return attackBonus;
-            }
-        }
-
-        public int FortitudeBaseSave
-        {
-            get
-            {
-                int save = 0;
-                foreach (RPGClass charClass in Classes)
-                {
-                    save += charClass.FortitudeBaseSave;
-                }
-                // Need to find some way to add in other random modifiers.
-                save += Constitution.Modifier; 
-                return save;
-            }
-        }
-        public int ReflexBaseSave 
-        { 
-            get 
-            {
-                int save = 0;
-                foreach (RPGClass charClass in Classes) 
-                {
-                    save += charClass.ReflexBaseSave;
-                }
-                save += Dexterity.Modifier;
-                return save;
-            } 
-        }
-        public int WillBaseSave
-        { 
-            get 
-            {
-                int save = 0;
-
-                foreach (RPGClass charClass in Classes)
-                {
-                    save += charClass.WillBaseSave;
-                }
-                save += Wisdom.Modifier;
-                return save;
-            }
-        }
-
-        public int CMB
-        {
-            get
-            {
-                return this.BaseAttackBonus + Strength.Modifier + Size.Modifier;
-            }
-        }
-
-        public int CMD
-        {
-            get
-            {
-                return this.BaseAttackBonus + Strength.Modifier + Dexterity.Modifier + 10;
-            }
-        }
 
         public List<string> KnownLanguages { get; set; }
 
@@ -130,31 +45,15 @@ namespace OnlineTabletop.Models
         /// <summary>
         /// The Player that this character belongs to.
         /// </summary>
-        public Player Player { get; set; }
+        public string PlayerId { get; set; }
+        #endregion
 
-        public Character()
-        {
-            
-        }
-
-        public Character(string name, Player player)
-        {
-            Name = name;
-            Player = player;
-        }
-
-        public Character(string name, Player player, Race race)
-        {
-            Name = name;
-            Player = player;
-            Race = race;
-        }
-
+        #region Derived character properties
         /// <summary>
         /// Retrieves the full character level. This is the combination of all classes
         /// </summary>
         /// <returns>Integer for character level</returns>
-        public int CharacterLevel()
+        public int GetCharacterLevel()
         {
             int level = 0;
             foreach (RPGClass charClass in Classes)
@@ -169,7 +68,7 @@ namespace OnlineTabletop.Models
         /// </summary>
         /// <param name="inClass">The class to check</param>
         /// <returns>Integer of specified class level</returns>
-        public int ClassLevel(RPGClass inClass)
+        public int GetClassLevel(RPGClass inClass)
         {
             return Classes.Count(x => x.Name == inClass.Name);
         }
@@ -179,9 +78,100 @@ namespace OnlineTabletop.Models
         /// </summary>
         /// <param name="className">The class name</param>
         /// <returns>Integer of specified class level</returns>
-        public int ClassLevel(string className)
+        public int GetClassLevel(string className)
         {
             return Classes.Count(x => x.Name == className);
         }
+
+        public List<int> GetBaseAttackBonus()
+        {
+            List<int> attackBonuses = new List<int>();
+            attackBonuses.Add(0);
+
+            foreach (RPGClass charClass in Classes)
+            {
+                for (int i = 0; i < charClass.BaseAttacks.Count; i++)
+                {
+                    if (i > attackBonuses.Count - 1)
+                    {
+                        attackBonuses.Add(charClass.BaseAttacks[i]);
+                    }
+                    else
+                    {
+                        attackBonuses[i] += charClass.BaseAttacks[i];
+                    }
+                }
+            }
+            return attackBonuses;
+        }
+
+        public int GetFortitudeBaseSave()
+        {
+            int save = 0;
+            foreach (RPGClass charClass in Classes)
+            {
+                save += charClass.FortitudeBaseSave;
+            }
+            // Need to find some way to add in other random modifiers.
+            save += Constitution.GetModifier();
+            return save;
+        }
+
+        public int GetReflexBaseSave()
+        {
+            int save = 0;
+            foreach (RPGClass charClass in Classes)
+            {
+                save += charClass.ReflexBaseSave;
+            }
+            save += Dexterity.GetModifier();
+            return save;
+        }
+
+        public int GetWillBaseSave()
+        {
+            int save = 0;
+
+            foreach (RPGClass charClass in Classes)
+            {
+                save += charClass.WillBaseSave;
+            }
+            save += Wisdom.GetModifier();
+            return save;
+        }
+
+        public int GetCMB()
+        {
+            if (this.GetBaseAttackBonus().Any()) return this.GetBaseAttackBonus().First() + Strength.GetModifier() + Size.Modifier;
+            return 0;
+        }
+
+        public int GetCMD()
+        {
+            if (this.GetBaseAttackBonus().Any()) return this.GetBaseAttackBonus().First() + Strength.GetModifier() + Dexterity.GetModifier() + 10;
+            return 0;
+        }
+        #endregion
+
+        #region Constructors
+        public Character()
+        {
+
+        }
+
+        public Character(string name, Player player)
+        {
+            Name = name;
+            PlayerId = player._id;
+        }
+
+        public Character(string name, Player player, Race race)
+        {
+            Name = name;
+            PlayerId = player._id;
+            Race = race;
+            Size = race.Size;
+        }
+        #endregion
     }
 }

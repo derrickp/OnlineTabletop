@@ -2,6 +2,7 @@
 using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using OnlineTabletop.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,9 @@ namespace OnlineTabletop.Persistence
     {
         public Player GetByEmail(string email)
         {
-            return new Player();
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(Player)));
+            var player = collection.AsQueryable<Player>().FirstOrDefault(x => x.email == email);
+            return player;
         }
 
         public override void Add(Player item)
@@ -24,7 +27,6 @@ namespace OnlineTabletop.Persistence
             {
                 throw new ArgumentException("Item already exists in collection.");
             }
-            RegisterMongoClassMaps();
             
             var bsonDoc = new BsonDocument();
             var bsonDocumentWriterSettings = new BsonDocumentWriterSettings();

@@ -21,6 +21,12 @@ namespace OnlineTabletop.Persistence
         public Repository(MongoClient client)
         {
             this.client = client;
+            RegisterMongoClassMaps();
+        }
+
+        public Repository(Func<MongoClient> @delegate)
+        {
+            
         }
 
         public T Get(string id)
@@ -30,7 +36,6 @@ namespace OnlineTabletop.Persistence
             var bsonDoc = collection.FindOneById(new ObjectId(id));
             if (bsonDoc != null)
             {
-                RegisterMongoClassMaps();
                 T returnVal = BsonSerializer.Deserialize<T>(bsonDoc);
 
                 return returnVal;
@@ -82,7 +87,6 @@ namespace OnlineTabletop.Persistence
         public IEnumerator<T> GetEnumerator()
         {
             var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
-            RegisterMongoClassMaps();
             return (IEnumerator<T>)collection.FindAll().Select(bs => BsonSerializer.Deserialize<T>(bs));
         }
 
@@ -93,13 +97,16 @@ namespace OnlineTabletop.Persistence
 
         internal void RegisterMongoClassMaps()
         {
-            // Register the way to deserialize the class using the Mongo Deserializer
-            // Setting the representation of the ObjectId to become a string.
-            BsonClassMap.RegisterClassMap<T>(cm =>
+            if (!BsonClassMap.IsClassMapRegistered(typeof(T)))
             {
-                cm.AutoMap();
-                cm.IdMemberMap.SetRepresentation(BsonType.ObjectId);
-            });
+                // Register the way to deserialize the class using the Mongo Deserializer
+                // Setting the representation of the ObjectId to become a string.
+                BsonClassMap.RegisterClassMap<T>(cm =>
+                {
+                    cm.AutoMap();
+                    cm.IdMemberMap.SetRepresentation(BsonType.ObjectId);
+                });
+            }
         }
     }
 }

@@ -24,20 +24,20 @@ namespace OnlineTabletop.Util
         /// <summary>
         /// Gets or sets the random number generator used to simulate rolls.
         /// </summary>
-        public static Random Rng { get; set; }
+        public static RandomSource Rng { get; set; }
 
         /// <summary>
         /// Creates the default RNG implementation used by this class.
         /// </summary>
         /// <returns>A random number generator.</returns>
-        public static Random CreateDefaultRng()
+        public static RandomSource CreateDefaultRng()
         {
             //// Initialize with a true random seed, instead of the current time.
             var secureRng = new RNGCryptoServiceProvider();
             byte[] seed = new byte[4];
             secureRng.GetBytes(seed);
             
-            return new MersenneTwister(BitConverter.ToInt32(seed, 0));
+            return new MersenneTwister(BitConverter.ToInt32(seed, 0), true);
         }
 
         /// <summary>

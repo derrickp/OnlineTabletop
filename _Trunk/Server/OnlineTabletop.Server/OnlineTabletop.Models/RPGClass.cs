@@ -17,7 +17,7 @@ namespace OnlineTabletop.Models
 
         public int WillBaseSave { get; set; }
 
-        public int BaseAttack { get; set; }
+        public List<int> BaseAttacks { get; set; }
 
         public int Level { get; set; }
 
