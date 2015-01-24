@@ -33,23 +33,7 @@ namespace OnlineTabletop.DTOs
 
         public int sizeModifier { get; set; }
 
-        [Required]
-        public AbilityDTO strength { get; set; }
-
-        [Required]
-        public AbilityDTO dexterity { get; set; }
-
-        [Required]
-        public AbilityDTO constitution { get; set; }
-
-        [Required]
-        public AbilityDTO intelligence { get; set; }
-
-        [Required]
-        public AbilityDTO wisdom { get; set; }
-
-        [Required]
-        public AbilityDTO charisma { get; set; }
+        public List<AbilityDTO> abilities { get; set; }
 
         public FullCharacterDTO()
         {

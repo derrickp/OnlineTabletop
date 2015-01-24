@@ -5,22 +5,13 @@ using System.Web;
 
 namespace OnlineTabletop.Models
 {
-    public enum AbilityNames
-    {
-        Strength,
-        Dexterity,
-        Constitution,
-        Intelligence,
-        Wisdom,
-        Charisma
-    }
 
     public class Ability
     {
         #region Properties
         private int _score { get; set; }
 
-        public AbilityNames Name { get; set; }
+        public string Name { get; set; }
 
         public int Score
         {
@@ -75,7 +66,7 @@ namespace OnlineTabletop.Models
             
         }
 
-        public Ability(AbilityNames name, int score)
+        public Ability(string name, int score)
         {
             Name = name;
             Score = score;

@@ -20,22 +20,22 @@ namespace OnlineTabletop.Mappers
             switch (abilityDTO.name)
             {
                 case "strength":
-                    ability.Name = AbilityNames.Strength;
+                    ability.Name = "Strength";
                     break;
                 case "dexterity":
-                    ability.Name = AbilityNames.Dexterity;
+                    ability.Name = "Dexterity";
                     break;
                 case "constitution":
-                    ability.Name = AbilityNames.Constitution;
+                    ability.Name = "Constitution";
                     break;
                 case "wisdom":
-                    ability.Name = AbilityNames.Wisdom;
+                    ability.Name = "Wisdom";
                     break;
                 case "intelligence":
-                    ability.Name = AbilityNames.Intelligence;
+                    ability.Name = "Intelligence";
                     break;
                 case "charisma":
-                    ability.Name = AbilityNames.Charisma;
+                    ability.Name = "Charisma";
                     break;
                 default:
                     break;
@@ -52,22 +52,22 @@ namespace OnlineTabletop.Mappers
             
             switch(ability.Name)
             {
-                case AbilityNames.Strength:
+                case "Strength":
                     abilityDTO.name = "strength";
                     break;
-                case AbilityNames.Dexterity:
+                case "Dexterity":
                     abilityDTO.name = "dexterity";
                     break;
-                case AbilityNames.Constitution:
+                case "Constitution":
                     abilityDTO.name = "constitution";
                     break;
-                case AbilityNames.Wisdom:
+                case "Wisdom":
                     abilityDTO.name = "wisdom";
                     break;
-                case AbilityNames.Intelligence:
+                case "Intelligence":
                     abilityDTO.name = "intelligence";
                     break;
-                case AbilityNames.Charisma:
+                case "Charisma":
                     abilityDTO.name = "charisma";
                     break;
                 default:

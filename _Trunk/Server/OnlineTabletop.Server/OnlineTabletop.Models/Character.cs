@@ -24,14 +24,9 @@ namespace OnlineTabletop.Models
         /// </summary>
         public string Size { get; set; }
         public int SizeModifier { get; set; }
-
-        // These are the characters base abilities. Only modified on creation and occasional levelling.
-        public Ability Strength { get; set; }
-        public Ability Dexterity { get; set; }
-        public Ability Constitution { get; set; }
-        public Ability Intelligence { get; set; }
-        public Ability Wisdom { get; set; }
-        public Ability Charisma { get; set; }
+        
+        // Making a generic list of abilities instead of putting each one in individually.
+        public List<Ability> Abilities { get; set; }
         
         public int TotalHP { get; set; }
         public int CurrentHP { get; set; }
@@ -113,8 +108,12 @@ namespace OnlineTabletop.Models
             {
                 save += charClass.FortitudeBaseSave;
             }
-            // Need to find some way to add in other random modifiers.
-            save += Constitution.GetModifier();
+            var conMod = this.Abilities.FirstOrDefault(x => x.Name == "Constitution");
+            if (conMod != null)
+            {
+                // Need to find some way to add in other random modifiers.
+                save += conMod.GetModifier();
+            }
             return save;
         }
 
@@ -125,7 +124,11 @@ namespace OnlineTabletop.Models
             {
                 save += charClass.ReflexBaseSave;
             }
-            save += Dexterity.GetModifier();
+            var dexMod = this.Abilities.FirstOrDefault(x => x.Name == "Dexterity");
+            if (dexMod != null)
+            {
+                save += dexMod.GetModifier();
+            }
             return save;
         }
 
@@ -137,19 +140,45 @@ namespace OnlineTabletop.Models
             {
                 save += charClass.WillBaseSave;
             }
-            save += Wisdom.GetModifier();
+            var wisMod = this.Abilities.FirstOrDefault(x => x.Name == "Wisdom");
+            if (wisMod != null)
+            {
+                save += wisMod.GetModifier();
+            }
             return save;
         }
 
         public int GetCMB()
         {
-            if (this.GetBaseAttackBonus().Any()) return this.GetBaseAttackBonus().First() + Strength.GetModifier() + SizeModifier;
+            if (this.GetBaseAttackBonus().Any())
+            {
+                var strMod = this.Abilities.FirstOrDefault(x => x.Name == "Strength");
+                if (strMod != null)
+                {
+                    return this.GetBaseAttackBonus().First() + strMod.GetModifier() + SizeModifier;
+                }
+                return this.GetBaseAttackBonus().First() + SizeModifier;
+            }
             return 0;
         }
 
         public int GetCMD()
         {
-            if (this.GetBaseAttackBonus().Any()) return this.GetBaseAttackBonus().First() + Strength.GetModifier() + Dexterity.GetModifier() + 10;
+            if (this.GetBaseAttackBonus().Any())
+            {
+                var baseAttack = this.GetBaseAttackBonus().First() + 10;
+                var strMod = this.Abilities.FirstOrDefault(x => x.Name == "Strength");
+                if (strMod != null)
+                {
+                    baseAttack += strMod.GetModifier();
+                } 
+                var dexMod = this.Abilities.FirstOrDefault(x => x.Name == "Strength");
+                if (dexMod != null)
+                {
+                    baseAttack += dexMod.GetModifier();
+                }
+                return baseAttack; 
+            }
             return 0;
         }
         #endregion
@@ -157,24 +186,9 @@ namespace OnlineTabletop.Models
         #region Constructors
         public Character()
         {
-
+            Abilities = new List<Ability>();
         }
 
-        public Character(string name, Player player)
-        {
-            Name = name;
-            PlayerId = player._id;
-        }
-
-        public Character(string name, Player player, Race race)
-        {
-            Name = name;
-            PlayerId = player._id;
-            Race = race.Name;
-            Size = race.Size.Type;
-            SizeModifier = race.Size.Modifier;
-            
-        }
         #endregion
     }
 }

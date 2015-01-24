@@ -17,12 +17,12 @@ namespace OnlineTabletop.Mappers
             if (!string.IsNullOrWhiteSpace(fullCharacterDTO.playerId)) character.PlayerId = fullCharacterDTO.playerId;
             character.Name = fullCharacterDTO.name;
             character.Race = fullCharacterDTO.race;
-            character.Strength = AbilityMapper.GetAbilityFromDTO(fullCharacterDTO.strength);
-            character.Dexterity = AbilityMapper.GetAbilityFromDTO(fullCharacterDTO.dexterity);
-            character.Wisdom = AbilityMapper.GetAbilityFromDTO(fullCharacterDTO.wisdom);
-            character.Constitution = AbilityMapper.GetAbilityFromDTO(fullCharacterDTO.constitution);
-            character.Intelligence = AbilityMapper.GetAbilityFromDTO(fullCharacterDTO.intelligence);
-            character.Charisma = AbilityMapper.GetAbilityFromDTO(fullCharacterDTO.charisma);
+
+            foreach (AbilityDTO abilityDTO in fullCharacterDTO.abilities)
+            {
+                var ability = AbilityMapper.GetAbilityFromDTO(abilityDTO);
+                character.Abilities.Add(ability);
+            }
 
             character.Size = fullCharacterDTO.size;
             character.SizeModifier = fullCharacterDTO.sizeModifier;
@@ -45,12 +45,13 @@ namespace OnlineTabletop.Mappers
             characterDTO.playerId = character.PlayerId;
             characterDTO.name = character.Name;
             characterDTO.race = character.Race;
-            characterDTO.strength = AbilityMapper.GetDTOFromAbility(character.Strength);
-            characterDTO.dexterity = AbilityMapper.GetDTOFromAbility(character.Dexterity);
-            characterDTO.constitution = AbilityMapper.GetDTOFromAbility(character.Constitution);
-            characterDTO.wisdom = AbilityMapper.GetDTOFromAbility(character.Wisdom);
-            characterDTO.intelligence = AbilityMapper.GetDTOFromAbility(character.Intelligence);
-            characterDTO.charisma = AbilityMapper.GetDTOFromAbility(character.Charisma);
+
+            foreach (Ability ability in character.Abilities)
+            {
+                var abilityDTO = AbilityMapper.GetDTOFromAbility(ability);
+                characterDTO.abilities.Add(abilityDTO);
+            }
+
             characterDTO.size = character.Size;
             characterDTO.sizeModifier = character.SizeModifier;
 

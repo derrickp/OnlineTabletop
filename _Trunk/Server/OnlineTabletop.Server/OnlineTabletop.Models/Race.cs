@@ -20,7 +20,7 @@ namespace OnlineTabletop.Models
 
         public string Adventurers { get; set; }
 
-        public Dictionary<AbilityNames, int> AbilityModifications { get; set; }
+        public Dictionary<string, int> AbilityModifications { get; set; }
 
         public Size Size { get; set; }
     }

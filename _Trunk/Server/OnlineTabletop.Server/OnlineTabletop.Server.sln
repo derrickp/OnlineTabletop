@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.DTOs", "Onli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.Persistence", "OnlineTabletop.Persistence\OnlineTabletop.Persistence.csproj", "{1D4F1B34-352C-44C7-884E-23C21EF59535}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mappers", "Mappers\Mappers.csproj", "{7FC7849B-016A-408A-84C9-C41EB4B24DDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.Mappers", "OnlineTabletop.Mappers\OnlineTabletop.Mappers.csproj", "{7FC7849B-016A-408A-84C9-C41EB4B24DDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
