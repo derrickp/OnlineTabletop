@@ -24,11 +24,6 @@ namespace OnlineTabletop.Persistence
             RegisterMongoClassMaps();
         }
 
-        public Repository(Func<MongoClient> @delegate)
-        {
-            
-        }
-
         public T Get(string id)
         {
             var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
@@ -43,7 +38,24 @@ namespace OnlineTabletop.Persistence
             return default(T);
         }
 
-        public abstract void Add(T item);
+        public virtual void Add(T item)
+        {
+            var database = client.GetServer().GetDatabase("tabletop");
+
+            var bsonDoc = new BsonDocument();
+            var bsonDocumentWriterSettings = new BsonDocumentWriterSettings();
+            bsonDocumentWriterSettings.GuidRepresentation = GuidRepresentation.Standard;
+            var bsonDocumentWriter = new BsonDocumentWriter(bsonDoc, bsonDocumentWriterSettings);
+            BsonSerializer.Serialize(bsonDocumentWriter, item);
+            var collection = database.GetCollection(MongoUtilities.GetCollectionFromType(item.GetType()));
+            var saveOptions = new MongoInsertOptions();
+            saveOptions.WriteConcern = WriteConcern.Acknowledged;
+            var succeeded = collection.Save(bsonDoc, saveOptions);
+            if (!succeeded.Ok)
+            {
+                throw new Exception(succeeded.LastErrorMessage);
+            }
+        }
 
         public void Clear()
         {
@@ -53,6 +65,9 @@ namespace OnlineTabletop.Persistence
 
         public bool Contains(T item)
         {
+            // If there is no id, we can't check whether the item exists.
+            if (string.IsNullOrWhiteSpace(item._id)) return false;
+
             var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
             var bsonDoc = collection.FindOneById(new ObjectId(item._id));
             return bsonDoc != null;

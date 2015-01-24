@@ -27,6 +27,7 @@ namespace OnlineTabletop.Server
             //builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerRequest().WithParameter("client", new MongoClient(connectionString));
             //builder.Register(c => new Repository<Player>(new MongoClient(connectionString))).As<IRepository<Player>>().InstancePerRequest();
             builder.Register(c => new PlayerRepository(new MongoClient(connectionString))).As<IPlayerRepository<Player>>().InstancePerRequest();
+            builder.Register(c => new CharacterRepository(new MongoClient(connectionString))).As<ICharacterRepository<Character>>().InstancePerRequest();
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());

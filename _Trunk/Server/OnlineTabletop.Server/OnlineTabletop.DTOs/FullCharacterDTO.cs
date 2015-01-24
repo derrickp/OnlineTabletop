@@ -14,10 +14,10 @@ namespace OnlineTabletop.DTOs
         [Required]
         public string name { get; set; }
 
-        public string playerName { get; set; }
+        public string playerId { get; set; }
 
         [Required]
-        public List<BasicRPGClassDTO> classes { get; set; }
+        public List<RpgClassDTO> classes { get; set; }
 
         public string race { get; set; }
 
@@ -29,7 +29,9 @@ namespace OnlineTabletop.DTOs
 
         public string deity { get; set; }
 
-        public SizeDTO size { get; set; }
+        public string size { get; set; }
+
+        public int sizeModifier { get; set; }
 
         [Required]
         public AbilityDTO strength { get; set; }
@@ -48,9 +50,6 @@ namespace OnlineTabletop.DTOs
 
         [Required]
         public AbilityDTO charisma { get; set; }
-
-        [Required]
-        public int characterLevel { get; set; }
 
         public FullCharacterDTO()
         {

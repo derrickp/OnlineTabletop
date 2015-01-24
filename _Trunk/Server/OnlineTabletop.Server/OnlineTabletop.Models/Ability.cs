@@ -18,27 +18,29 @@ namespace OnlineTabletop.Models
     public class Ability
     {
         #region Properties
+        private int _score { get; set; }
+
         public AbilityNames Name { get; set; }
 
         public int Score
         {
             get
             {
-                return Score;
+                return _score;
             }
             set
             {
                 if (value < 2)
                 {
-                    Score = 2;
+                    _score = 2;
                 }
                 else if (value > 28)
                 {
-                    Score = 28;
+                    _score = 28;
                 }
                 else
                 {
-                    Score = value;
+                    _score = value;
                 }
             }
         }

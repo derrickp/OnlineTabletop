@@ -121,6 +121,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mappers\Mappers.csproj">
+      <Project>{7fc7849b-016a-408a-84c9-c41eb4b24dda}</Project>
+      <Name>Mappers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OnlineTabletop.DTOs\OnlineTabletop.DTOs.csproj">
       <Project>{6440ddc7-6f7b-40d9-8e73-877e739e4afd}</Project>
       <Name>OnlineTabletop.DTOs</Name>

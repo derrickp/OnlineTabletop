@@ -5,7 +5,7 @@ using System.Web;
 
 namespace OnlineTabletop.Models
 {
-    public class RPGClass
+    public class RpgClass
     {
         public string Name { get; set; }
 
@@ -21,7 +21,7 @@ namespace OnlineTabletop.Models
 
         public int Level { get; set; }
 
-        public RPGClass()
+        public RpgClass()
         {
 
         }

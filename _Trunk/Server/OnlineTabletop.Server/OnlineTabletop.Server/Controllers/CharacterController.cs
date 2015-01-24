@@ -1,4 +1,5 @@
 ﻿using OnlineTabletop.DTOs;
+using OnlineTabletop.Mappers;
 using OnlineTabletop.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace OnlineTabletop.Server.Controllers
 {
     public class CharacterController : ApiController
     {
+        ICharacterRepository<Character> _characterRepository;
 
         // GET: api/characters
         // Get the characters belonging to a certain player.
@@ -23,30 +25,14 @@ namespace OnlineTabletop.Server.Controllers
         public IEnumerable<BasicCharacterDTO> Get(string playerId)
         {
             List<BasicCharacterDTO> characterDTOs = new List<BasicCharacterDTO>();
+            var characters = _characterRepository.GetCharactersByPlayerId(playerId);
 
-            Player player = new Player();
-            if (player != null)
+            if (characters != null)
             {
-                foreach (string characterId in player.characterIds)
+                foreach (var character in characters)
                 {
-                    var character = new Character();
-                    BasicCharacterDTO basicChar = new BasicCharacterDTO()
-                    {
-                        name = character.Name,
-                        playerName = player.name,
-                        characterLevel = character.GetCharacterLevel(),
-                        race = "elf"
-                    };
-                    basicChar.classes = new List<BasicRPGClassDTO>();
-                    foreach (RPGClass rpgClass in character.Classes)
-                    {
-                        basicChar.classes.Add(new BasicRPGClassDTO
-                        {
-                            name = rpgClass.Name,
-                            level = rpgClass.Level
-                        });
-                    }
-                    characterDTOs.Add(basicChar);
+                    var basicDTO = CharacterMapper.BasicDTOFromCharacter(character);
+                    characterDTOs.Add(basicDTO);
                 }
             }
             return characterDTOs;
@@ -56,65 +42,63 @@ namespace OnlineTabletop.Server.Controllers
         [Route("player/{playerId}/characters/{characterId}")]
         public FullCharacterDTO Get(string playerId, string characterId)
         {
-            Player player = new Player();
-
             var resp = new HttpResponseMessage();
-
-            if (player != null)
+            try
             {
-                var character = new Character();
-                if (character != null)
+                var character = _characterRepository.Get(characterId);
+                if (character == null)
                 {
-                    //if (detaillevel == "basic")
-                    {
-                        FullCharacterDTO fullCharacterDTO = new FullCharacterDTO()
-                        {
-                            name = "Crazy Name",
-                            playerName = "Derrick",
-                            characterLevel = 1,
-                            race = "elf"
-                        };
-                        fullCharacterDTO.classes = new List<BasicRPGClassDTO>();
-                        foreach (RPGClass rpgClass in character.Classes)
-                        {
-                            fullCharacterDTO.classes.Add(new BasicRPGClassDTO
-                            {
-                                name = rpgClass.Name,
-                                level = rpgClass.Level
-                            });
-                        }
-                        return fullCharacterDTO;
-                    }
+                    resp.StatusCode = HttpStatusCode.NotFound;
+                    resp.Content = new StringContent(string.Format("Character not found with Id = {0}", characterId));
+                    resp.ReasonPhrase = "Character Not Found";
+                    throw new HttpResponseException(resp);
                 }
-                resp.StatusCode = HttpStatusCode.NotFound;
-                resp.Content = new StringContent(string.Format("Character not found with Id = {0}", characterId));
-                resp.ReasonPhrase = "Character Not Found";
-                throw new HttpResponseException(resp);
+                if (character.PlayerId != playerId)
+                {
+                    resp.StatusCode = HttpStatusCode.Conflict;
+                    resp.Content = new StringContent(string.Format("Character found but is not associated with the given player Id"));
+                    resp.ReasonPhrase = "Mismatch character Id and player Id";
+                    throw new HttpResponseException(resp);
+                }
+                var characterDTO = CharacterMapper.FullDTOFromCharacter(character);
+                return characterDTO;
             }
-            resp.StatusCode = HttpStatusCode.NotFound;
-            resp.Content = new StringContent(string.Format("No player with ID = {0}", playerId));
-            resp.ReasonPhrase = "Player Not Found";
-            throw new HttpResponseException(resp);
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        // POST: api/Character
+        // POST: player/playerId/Character
         [Route("player/{playerId}/character")]
-        public IHttpActionResult Post([FromBody]FullCharacterDTO basicCharacter, string playerId)
+        public IHttpActionResult Post([FromBody]FullCharacterDTO fullCharacterDTO, string playerId)
         {
             if (ModelState.IsValid)
             {
-                return Ok();
+                var character = CharacterMapper.CharacterFromFullDTO(fullCharacterDTO);
+                if (!_characterRepository.Contains(character))
+                {
+                    character.PlayerId = playerId;
+                    _characterRepository.Add(character);
+                    var basicDTO = CharacterMapper.BasicDTOFromCharacter(character);
+                    return Ok(basicDTO);
+                }
+                else
+                {
+                    return Conflict();
+                }
             }
             else
             {
                 return BadRequest(ModelState);
             }
-            
         }
 
-        // PUT: api/Character/5
-        public void Put(int id, [FromBody]string value)
+        // PUT: player/playerId/character/characterId
+        [Route("player/{playerId}/character/{characterId}")]
+        public void Put(string playerId, string characterId,[FromBody]FullCharacterDTO fullCharacterDTO)
         {
+
         }
 
         // DELETE: api/Character/5
@@ -122,9 +106,9 @@ namespace OnlineTabletop.Server.Controllers
         {
         }
 
-        public CharacterController(IPlayerRepository<Player> playerRepository)
+        public CharacterController(ICharacterRepository<Character> characterRepository)
         {
-            //this._playerRepository = playerRepository;
+            this._characterRepository = characterRepository;
         }
     }
 }

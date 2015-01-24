@@ -28,20 +28,10 @@ namespace OnlineTabletop.Persistence
                 throw new ArgumentException("Item already exists in collection.");
             }
             
-            var bsonDoc = new BsonDocument();
-            var bsonDocumentWriterSettings = new BsonDocumentWriterSettings();
-            bsonDocumentWriterSettings.GuidRepresentation = GuidRepresentation.Standard;
-            var bsonDocumentWriter = new BsonDocumentWriter(bsonDoc, bsonDocumentWriterSettings);
-            BsonSerializer.Serialize(bsonDocumentWriter, item);
-            bsonDoc.Set("_id", new ObjectId());
-            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(Player)));
-            var saveOptions = new MongoInsertOptions();
-            saveOptions.WriteConcern = WriteConcern.Acknowledged;
-            var succeeded = collection.Save(bsonDoc, saveOptions);
-            if (!succeeded.Ok)
-            {
-                throw new Exception(succeeded.LastErrorMessage);
-            }
+            // Create the id here instead of the base. Create it here because I may need it later.
+            var bsonId = ObjectId.GenerateNewId(DateTime.Now);
+            item._id = bsonId.ToString();
+            base.Add(item);
         }
 
         public PlayerRepository(MongoClient client) : base (client)

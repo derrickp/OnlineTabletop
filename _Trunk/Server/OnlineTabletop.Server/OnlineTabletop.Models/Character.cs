@@ -12,17 +12,18 @@ namespace OnlineTabletop.Models
 
         public string Name { get; set; }
 
-        public Race Race { get; set; }
+        public string Race { get; set; }
 
         public double Weight { get; set; }
         public double Height { get; set; }
-        public Alignments Alignment { get; set; }
+        public string Alignment { get; set; }
         public string Deity { get; set; }
 
         /// <summary>
         /// Kept separate from Race because spells could also impact a characters size.
         /// </summary>
-        public Size Size { get; set; }
+        public string Size { get; set; }
+        public int SizeModifier { get; set; }
 
         // These are the characters base abilities. Only modified on creation and occasional levelling.
         public Ability Strength { get; set; }
@@ -40,7 +41,7 @@ namespace OnlineTabletop.Models
 
         public List<string> KnownLanguages { get; set; }
 
-        public List<RPGClass> Classes { get; set; }
+        public List<RpgClass> Classes { get; set; }
 
         /// <summary>
         /// The Player that this character belongs to.
@@ -56,7 +57,7 @@ namespace OnlineTabletop.Models
         public int GetCharacterLevel()
         {
             int level = 0;
-            foreach (RPGClass charClass in Classes)
+            foreach (RpgClass charClass in Classes)
             {
                 level += charClass.Level;
             }
@@ -68,7 +69,7 @@ namespace OnlineTabletop.Models
         /// </summary>
         /// <param name="inClass">The class to check</param>
         /// <returns>Integer of specified class level</returns>
-        public int GetClassLevel(RPGClass inClass)
+        public int GetClassLevel(RpgClass inClass)
         {
             return Classes.Count(x => x.Name == inClass.Name);
         }
@@ -88,7 +89,7 @@ namespace OnlineTabletop.Models
             List<int> attackBonuses = new List<int>();
             attackBonuses.Add(0);
 
-            foreach (RPGClass charClass in Classes)
+            foreach (RpgClass charClass in Classes)
             {
                 for (int i = 0; i < charClass.BaseAttacks.Count; i++)
                 {
@@ -108,7 +109,7 @@ namespace OnlineTabletop.Models
         public int GetFortitudeBaseSave()
         {
             int save = 0;
-            foreach (RPGClass charClass in Classes)
+            foreach (RpgClass charClass in Classes)
             {
                 save += charClass.FortitudeBaseSave;
             }
@@ -120,7 +121,7 @@ namespace OnlineTabletop.Models
         public int GetReflexBaseSave()
         {
             int save = 0;
-            foreach (RPGClass charClass in Classes)
+            foreach (RpgClass charClass in Classes)
             {
                 save += charClass.ReflexBaseSave;
             }
@@ -132,7 +133,7 @@ namespace OnlineTabletop.Models
         {
             int save = 0;
 
-            foreach (RPGClass charClass in Classes)
+            foreach (RpgClass charClass in Classes)
             {
                 save += charClass.WillBaseSave;
             }
@@ -142,7 +143,7 @@ namespace OnlineTabletop.Models
 
         public int GetCMB()
         {
-            if (this.GetBaseAttackBonus().Any()) return this.GetBaseAttackBonus().First() + Strength.GetModifier() + Size.Modifier;
+            if (this.GetBaseAttackBonus().Any()) return this.GetBaseAttackBonus().First() + Strength.GetModifier() + SizeModifier;
             return 0;
         }
 
@@ -169,8 +170,10 @@ namespace OnlineTabletop.Models
         {
             Name = name;
             PlayerId = player._id;
-            Race = race;
-            Size = race.Size;
+            Race = race.Name;
+            Size = race.Size.Type;
+            SizeModifier = race.Size.Modifier;
+            
         }
         #endregion
     }

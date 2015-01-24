@@ -46,9 +46,8 @@
     <Compile Include="RollsDTO.cs" />
     <Compile Include="BasicCharacterDTO.cs" />
     <Compile Include="BasicPlayerDTO.cs" />
-    <Compile Include="BasicRPGClassDTO.cs" />
+    <Compile Include="RpgClassDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SizeDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -39,8 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbilityMapper.cs" />
     <Compile Include="CharacterMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RpgClassMapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineTabletop.DTOs\OnlineTabletop.DTOs.csproj">
+      <Project>{6440ddc7-6f7b-40d9-8e73-877e739e4afd}</Project>
+      <Name>OnlineTabletop.DTOs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineTabletop.Models\OnlineTabletop.Models.csproj">
+      <Project>{6f6b0faa-3168-4a9d-ab02-a23ee1c0fbf8}</Project>
+      <Name>OnlineTabletop.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

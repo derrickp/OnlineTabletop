@@ -1,28 +1,26 @@
 {
-	"name" : "RazzleMan",
+	"name" : "Leaf blower",
 	"classes" : [{
-			"name" : "Fighter",
+			"name" : "Druid",
 			"level" : 1
 		}
 	],
-	"race" : "Orc",
-	"size" : {
-		"size" : "medium",
-		"modifier" : 0
-	},
+	"race" : "Dwarf",
+	"size" : "medium",
+	"sizeModifier" : 0,
 	"strength" : {
 		"name" : "strength",
-		"score" : 16,
+		"score" : 10,
 		"modifier" : 3
 	},
 	"dexterity" : {
 		"name" : "dexterity",
-		"score" : 16,
+		"score" : 14,
 		"modifier" : 3
 	},
 	"constitution" : {
 		"name" : "constitution",
-		"score" : 16,
+		"score" : 12,
 		"modifier" : 3
 	},
 	"wisdom" : {
@@ -32,13 +30,12 @@
 	},
 	"intelligence" : {
 		"name" : "intelligence",
-		"score" : 16,
+		"score" : 12,
 		"modifier" : 3
 	},
 	"charisma" : {
 		"name" : "charisma",
-		"score" : 16,
+		"score" : 10,
 		"modifier" : 3
-	},
-	"characterLevel" : 1
+	}
 }
