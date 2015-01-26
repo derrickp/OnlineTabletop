@@ -12,12 +12,12 @@ using System.Web.Http.Results;
 
 namespace OnlineTabletop.Server.Controllers
 {
+    [RoutePrefix("player")]
     public class PlayerController : ApiController
     {
         IPlayerRepository<Player> _playerRepository { get; set; }
 
-        // GET: api/Player/5
-        [Route("playerinfo/{playerId}")]
+        [Route("info/{playerId}")]
         [HttpGet]
         [ResponseType(typeof(BasicPlayerDTO))]
         [EnableCors("*", "*", "GET")]

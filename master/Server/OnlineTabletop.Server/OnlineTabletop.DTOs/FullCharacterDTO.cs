@@ -16,7 +16,6 @@ namespace OnlineTabletop.DTOs
 
         public string playerId { get; set; }
 
-        [Required]
         public List<RpgClassDTO> classes { get; set; }
 
         public string race { get; set; }
