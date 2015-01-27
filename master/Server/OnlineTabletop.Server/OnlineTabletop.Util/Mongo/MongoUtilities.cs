@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineTabletop.Persistence
+namespace OnlineTabletop.Util.Mongo
 {
     public static class MongoUtilities
     {

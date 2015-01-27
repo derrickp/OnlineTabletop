@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Web.Routing;
 using OnlineTabletop.Persistence;
 using OnlineTabletop.Models;
+using OnlineTabletop.Accounts;
 using MongoDB.Driver;
 
 namespace OnlineTabletop.Server
@@ -29,6 +30,7 @@ namespace OnlineTabletop.Server
             //builder.Register(c => new Repository<Player>(new MongoClient(connectionString))).As<IRepository<Player>>().InstancePerRequest();
             builder.Register(c => new PlayerRepository(client)).As<IPlayerRepository<Player>>().InstancePerRequest();
             builder.Register(c => new CharacterRepository(client)).As<ICharacterRepository<Character>>().InstancePerRequest();
+            builder.Register(c => new AccountManager(client)).As<IAccountManager<DbAccount>>().InstancePerRequest();
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.Persistence"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.Mappers", "OnlineTabletop.Mappers\OnlineTabletop.Mappers.csproj", "{7FC7849B-016A-408A-84C9-C41EB4B24DDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTabletop.Accounts", "OnlineTabletop.Accounts\OnlineTabletop.Accounts.csproj", "{64AE68EF-348F-4FDE-837A-C8ED6977715D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{7FC7849B-016A-408A-84C9-C41EB4B24DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FC7849B-016A-408A-84C9-C41EB4B24DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FC7849B-016A-408A-84C9-C41EB4B24DDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64AE68EF-348F-4FDE-837A-C8ED6977715D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64AE68EF-348F-4FDE-837A-C8ED6977715D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64AE68EF-348F-4FDE-837A-C8ED6977715D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64AE68EF-348F-4FDE-837A-C8ED6977715D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

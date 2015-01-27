@@ -26,7 +26,7 @@ namespace OnlineTabletop.Persistence
 
         public T Get(string id)
         {
-            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(T)));
 
             var bsonDoc = collection.FindOneById(new ObjectId(id));
             if (bsonDoc != null)
@@ -47,7 +47,7 @@ namespace OnlineTabletop.Persistence
             bsonDocumentWriterSettings.GuidRepresentation = GuidRepresentation.Standard;
             var bsonDocumentWriter = new BsonDocumentWriter(bsonDoc, bsonDocumentWriterSettings);
             BsonSerializer.Serialize(bsonDocumentWriter, item);
-            var collection = database.GetCollection(MongoUtilities.GetCollectionFromType(item.GetType()));
+            var collection = database.GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(item.GetType()));
             var saveOptions = new MongoInsertOptions();
             saveOptions.WriteConcern = WriteConcern.Acknowledged;
             var succeeded = collection.Save(bsonDoc, saveOptions);
@@ -59,7 +59,7 @@ namespace OnlineTabletop.Persistence
 
         public void Clear()
         {
-            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(T)));
             collection.RemoveAll();
         }
 
@@ -68,7 +68,7 @@ namespace OnlineTabletop.Persistence
             // If there is no id, we can't check whether the item exists.
             if (string.IsNullOrWhiteSpace(item._id)) return false;
 
-            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(T)));
             var bsonDoc = collection.FindOneById(new ObjectId(item._id));
             return bsonDoc != null;
         }
@@ -82,7 +82,7 @@ namespace OnlineTabletop.Persistence
         {
             get 
             {
-                var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
+                var collection = client.GetServer().GetDatabase("tabletop").GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(T)));
                 return Convert.ToInt32(collection.Count());
             }
         }
@@ -94,14 +94,14 @@ namespace OnlineTabletop.Persistence
 
         public bool Remove(T item)
         {
-            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(T)));
             
             return false;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(MongoUtilities.GetCollectionFromType(typeof(T)));
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(T)));
             return (IEnumerator<T>)collection.FindAll().Select(bs => BsonSerializer.Deserialize<T>(bs));
         }
 

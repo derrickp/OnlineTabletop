@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharacterRepository.cs" />
-    <Compile Include="MongoUtilities.cs" />
     <Compile Include="PlayerRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +58,10 @@
       <Project>{6f6b0faa-3168-4a9d-ab02-a23ee1c0fbf8}</Project>
       <Name>OnlineTabletop.Models</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineTabletop.Util\OnlineTabletop.Util.csproj">
+      <Project>{9316a195-ad4b-4270-a675-93a2593da31d}</Project>
+      <Name>OnlineTabletop.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

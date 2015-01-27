@@ -18,7 +18,7 @@ namespace OnlineTabletop.Persistence
         {
             var characters = new HashSet<Character>();
             var database = client.GetServer().GetDatabase("tabletop");
-            var playerCollection = database.GetCollection(MongoUtilities.GetCollectionFromType(typeof(Player)));
+            var playerCollection = database.GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(Player)));
             
             if (playerCollection == null)
             {
@@ -38,7 +38,7 @@ namespace OnlineTabletop.Persistence
                 if (characterIdsArray.Count > 0)
                 {
                     var characterIds = characterIdsArray.ToList().Select(x => x.ToString());
-                    var collection = database.GetCollection(MongoUtilities.GetCollectionFromType(typeof(Character)));
+                    var collection = database.GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(Character)));
                     if (collection == null)
                     {
                         throw new Exception("No characters in the database.");
@@ -75,7 +75,7 @@ namespace OnlineTabletop.Persistence
             var database = client.GetServer().GetDatabase("tabletop");
 
             // Verify that the player exists in the database that we are going to be adding the character to.
-            var playerColl = database.GetCollection(MongoUtilities.GetCollectionFromType(typeof(Player)));
+            var playerColl = database.GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(Player)));
             if (playerColl == null)
             {
                 throw new Exception("No player collection currently in database.");

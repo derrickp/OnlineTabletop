@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\RollController.cs" />
@@ -127,6 +128,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OnlineTabletop.Accounts\OnlineTabletop.Accounts.csproj">
+      <Project>{64ae68ef-348f-4fde-837a-c8ed6977715d}</Project>
+      <Name>OnlineTabletop.Accounts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OnlineTabletop.Mappers\OnlineTabletop.Mappers.csproj">
       <Project>{7fc7849b-016a-408a-84c9-c41eb4b24dda}</Project>
       <Name>OnlineTabletop.Mappers</Name>
