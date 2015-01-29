@@ -9,11 +9,8 @@ namespace OnlineTabletop.Models
     {
         public string _id { get; set; }
 
-        public string hash { get; set; }
-        public string salt { get; set; }
+        public string accountName { get; set; }
 
-        public string name { get; set; }
-        
         public string displayName { get; set; }
         
         public string email { get; set; }

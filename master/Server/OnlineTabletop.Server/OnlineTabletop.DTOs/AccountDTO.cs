@@ -4,18 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineTabletop.Accounts
+namespace OnlineTabletop.DTOs
 {
-    public class Account
+    public class AccountDTO
     {
-        public string _id { get; set; }
-
+        public string id { get; set; }
         public string name { get; set; }
-
         public string email { get; set; }
-
-        public string hash { get; set; }
-
-        public string salt { get; set; }
     }
 }

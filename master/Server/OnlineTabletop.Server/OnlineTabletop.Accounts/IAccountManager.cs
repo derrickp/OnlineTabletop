@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace OnlineTabletop.Accounts
 {
-    public interface IAccountManager<DbAccount>
+    public interface IAccountManager<Account>
     {
-        DbAccount FindAccountByEmail(string email);
+        Account FindAccountByEmail(string email);
+
+        Account Add(RegisterBindingModel account);
     }
 }

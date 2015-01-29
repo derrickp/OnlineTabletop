@@ -1,4 +1,5 @@
 ﻿using OnlineTabletop.Accounts;
+using OnlineTabletop.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace OnlineTabletop.Server.Controllers
     [RoutePrefix("account")]
     public class AccountController : ApiController
     {
-        private IAccountManager<DbAccount> _accountManager;
+        private IAccountManager<Account> _accountManager;
         // GET: api/Account
         public IEnumerable<string> Get()
         {
@@ -34,16 +35,23 @@ namespace OnlineTabletop.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var dbAccount = _accountManager.FindAccountByEmail(registerModel.Email);
+            var account = _accountManager.FindAccountByEmail(registerModel.Email);
 
-            if (dbAccount != null)
+            if (account != null)
             {
                 return Conflict();
             }
 
-            return Ok();
-            
+            account = _accountManager.Add(registerModel);
 
+            var accountDTO = new AccountDTO()
+            {
+                id = account._id,
+                name = account.name,
+                email = account.email
+            };
+
+            return Ok(accountDTO);
         }
 
         // PUT: api/Account/5
@@ -56,7 +64,7 @@ namespace OnlineTabletop.Server.Controllers
         {
         }
 
-        public AccountController(IAccountManager<DbAccount> accountManager)
+        public AccountController(IAccountManager<Account> accountManager)
         {
             _accountManager = accountManager;
         }

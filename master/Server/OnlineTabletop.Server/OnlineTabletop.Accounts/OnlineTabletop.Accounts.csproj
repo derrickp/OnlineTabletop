@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net">
+      <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="MongoDB.Bson">
       <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -56,10 +59,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OnlineTabletop.Models\OnlineTabletop.Models.csproj">
+      <Project>{6f6b0faa-3168-4a9d-ab02-a23ee1c0fbf8}</Project>
+      <Name>OnlineTabletop.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OnlineTabletop.Util\OnlineTabletop.Util.csproj">
       <Project>{9316a195-ad4b-4270-a675-93a2593da31d}</Project>
       <Name>OnlineTabletop.Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

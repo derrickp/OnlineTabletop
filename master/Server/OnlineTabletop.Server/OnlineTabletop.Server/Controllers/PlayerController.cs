@@ -29,7 +29,7 @@ namespace OnlineTabletop.Server.Controllers
             {
                 BasicPlayerDTO playerDto = new BasicPlayerDTO(){
                     id = player._id,
-                    name = player.name,
+                    name = player.accountName,
                     email = player.email
                 };
                 return Ok(playerDto);
@@ -55,7 +55,7 @@ namespace OnlineTabletop.Server.Controllers
                 }
                 player = new Player()
                 {
-                    name = playerDTO.name,
+                    accountName = playerDTO.name,
                     email = playerDTO.email
                 };
                 try
@@ -67,7 +67,7 @@ namespace OnlineTabletop.Server.Controllers
                         return Ok(new BasicPlayerDTO()
                         {
                             id = player._id,
-                            name = player.name,
+                            name = player.accountName,
                             email = player.email
                         });
                     }
