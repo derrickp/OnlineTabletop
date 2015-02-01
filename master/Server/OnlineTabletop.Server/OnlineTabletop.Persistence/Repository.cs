@@ -50,6 +50,7 @@ namespace OnlineTabletop.Persistence
             var collection = database.GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(item.GetType()));
             var saveOptions = new MongoInsertOptions();
             saveOptions.WriteConcern = WriteConcern.Acknowledged;
+            
             var succeeded = collection.Save(bsonDoc, saveOptions);
             if (!succeeded.Ok)
             {

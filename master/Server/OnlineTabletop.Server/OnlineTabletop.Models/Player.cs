@@ -9,15 +9,15 @@ namespace OnlineTabletop.Models
     {
         public string _id { get; set; }
 
-        public string accountName { get; set; }
+        public string AccountName { get; set; }
 
-        public string displayName { get; set; }
+        public string DisplayName { get; set; }
         
-        public string email { get; set; }
+        public string Email { get; set; }
         
-        public IList<string> characterIds { get; set; }
+        public IList<string> CharacterIds { get; set; }
 
-        public DateTime joinDate { get; set; }
+        public DateTime JoinDate { get; set; }
 
         public Player()
         {

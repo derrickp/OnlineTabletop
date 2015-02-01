@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
 
@@ -17,14 +16,13 @@ namespace OnlineTabletop.Server.Controllers
     {
         IPlayerRepository<Player> _playerRepository { get; set; }
 
-        [Route("info/{playerId}")]
+        [Route("info/{playerName}")]
         [HttpGet]
         [ResponseType(typeof(BasicPlayerDTO))]
-        [EnableCors("*", "*", "GET")]
-        public IHttpActionResult Get(string playerId)
+        public IHttpActionResult Get(string playerName)
         {
             
-            Player player = _playerRepository.Get(playerId);
+            Player player = _playerRepository.GetByAccountName(playerName);
             if (player != null)
             {
                 BasicPlayerDTO playerDto = new BasicPlayerDTO(){

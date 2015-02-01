@@ -17,3 +17,5 @@ master/Server/OnlineTabletop.Server/OnlineTabletop.Mappers/obj
 master/Server/OnlineTabletop.Server/OnlineTabletop.Mappers/bin
 master/Server/OnlineTabletop.Server/OnlineTabletop.Accounts/bin
 master/Server/OnlineTabletop.Server/OnlineTabletop.Accounts/obj
+master/Server/OnlineTabletop.Server/OnlineTabletop.SelfHost/bin
+master/Server/OnlineTabletop.Server/OnlineTabletop.SelfHost/obj

@@ -17,7 +17,14 @@ namespace OnlineTabletop.Persistence
         public Player GetByEmail(string email)
         {
             var collection = client.GetServer().GetDatabase("tabletop").GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(Player)));
-            var player = collection.AsQueryable<Player>().FirstOrDefault(x => x.email == email);
+            var player = collection.AsQueryable<Player>().FirstOrDefault(x => x.Email == email);
+            return player;
+        }
+
+        public Player GetByAccountName(string accountName)
+        {
+            var collection = client.GetServer().GetDatabase("tabletop").GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(Player)));
+            var player = collection.AsQueryable<Player>().FirstOrDefault(x => x.AccountName == accountName);
             return player;
         }
 

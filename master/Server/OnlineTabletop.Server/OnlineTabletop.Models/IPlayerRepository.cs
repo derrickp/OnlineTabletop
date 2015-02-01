@@ -10,5 +10,7 @@ namespace OnlineTabletop.Models
         where T:Player
     {
         Player GetByEmail(string email);
+
+        Player GetByAccountName(string accountName);
     }
 }

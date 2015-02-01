@@ -28,6 +28,7 @@ namespace OnlineTabletop.Accounts
                 BsonClassMap.RegisterClassMap<Account>(cm =>
                 {
                     cm.AutoMap();
+
                     cm.IdMemberMap.SetRepresentation(BsonType.ObjectId);
                 });
             }
@@ -64,7 +65,7 @@ namespace OnlineTabletop.Accounts
                 salt = salt,
                 hash = hash
             };
-
+            
             var bsonDoc = new BsonDocument();
             var bsonDocumentWriterSettings = new BsonDocumentWriterSettings();
             bsonDocumentWriterSettings.GuidRepresentation = GuidRepresentation.Standard;
@@ -83,9 +84,9 @@ namespace OnlineTabletop.Accounts
             var player = new Player()
             {
                 _id = playerId,
-                accountName = account.name,
-                email = account.email,
-                joinDate = DateTime.Now
+                AccountName = account.name,
+                Email = account.email,
+                JoinDate = DateTime.Now
             };
 
             var playerCollection = _client.GetServer().GetDatabase("tabletop").GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(player.GetType()));
