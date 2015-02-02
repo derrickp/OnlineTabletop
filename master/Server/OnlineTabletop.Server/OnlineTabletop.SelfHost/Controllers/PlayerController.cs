@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
@@ -21,7 +22,7 @@ namespace OnlineTabletop.Server.Controllers
         [ResponseType(typeof(BasicPlayerDTO))]
         public IHttpActionResult Get(string playerName)
         {
-            
+            var principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
             Player player = _playerRepository.GetByAccountName(playerName);
             if (player != null)
             {

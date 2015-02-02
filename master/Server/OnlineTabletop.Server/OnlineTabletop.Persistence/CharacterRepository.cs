@@ -109,7 +109,7 @@ namespace OnlineTabletop.Persistence
                 {
                     characterIdsVal = new BsonArray();
                 }
-
+                
                 var characterIdsArray = characterIdsVal.AsBsonArray;
                 var bsonIdVal = new BsonString(bsonId.ToString());
                 characterIdsArray.Add(bsonIdVal);

@@ -10,6 +10,10 @@ namespace OnlineTabletop.Accounts
     {
         Account FindAccountByEmail(string email);
 
+        Account FindAccountByName(string accountName);
+
+        bool VerifyLogin(string name, string password);
+
         Account Add(RegisterBindingModel account);
     }
 }

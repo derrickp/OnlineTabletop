@@ -1,11 +1,15 @@
 ﻿using Autofac;
 using Autofac.Integration.Owin;
 using Autofac.Integration.WebApi;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.OAuth;
 using MongoDB.Driver;
 using OnlineTabletop.Accounts;
 using OnlineTabletop.Models;
 using OnlineTabletop.Persistence;
+using OnlineTabletop.SelfHost.Providers;
 using Owin;
+using System;
 using System.Reflection;
 using System.Web.Http; 
 
@@ -29,6 +33,19 @@ namespace OnlineTabletop.SelfHost
 
             var connectionString = "mongodb://localhost";
             var client = new MongoClient(connectionString);
+
+            appBuilder.UseOAuthAuthorizationServer(new OAuthAuthorizationServerOptions()
+                {
+                    // for demo purposes
+                    AllowInsecureHttp = true,
+
+                    TokenEndpointPath = new PathString("/token"),
+                    AccessTokenExpireTimeSpan = TimeSpan.FromHours(8),
+
+                    Provider = new SimpleAuthorizationServerProvider(new AccountManager(client))
+                });
+
+            appBuilder.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
             var builder = new ContainerBuilder();
 

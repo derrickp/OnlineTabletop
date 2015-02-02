@@ -41,6 +41,22 @@ namespace OnlineTabletop.Accounts
             return account;
         }
 
+        public Account FindAccountByName(string name)
+        {
+            var collection = _client.GetServer().GetDatabase("tabletop").GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(Account)));
+            var account = collection.AsQueryable<Account>().FirstOrDefault(x => x.name == name);
+            return account;
+        }
+
+        public bool VerifyLogin(string name, string password)
+        {
+            var account = FindAccountByName(name);
+            var salt = account.salt;
+            var hash = HashPassword(password, salt);
+            
+            return account.hash == hash;
+        }
+
         /// <summary>
         /// Adds a new acc
         /// </summary>
@@ -53,8 +69,14 @@ namespace OnlineTabletop.Accounts
             {
                 throw new Exception("No account collection in database.");
             }
-            var salt = BCrypt.Net.BCrypt.GenerateSalt(12);
-            var hash = BCrypt.Net.BCrypt.HashPassword(registerBindingModel.Password + pepper, salt);
+            
+            var hashDict = HashPassword(registerBindingModel.Password);
+
+            if (!hashDict.ContainsKey("hash") || !hashDict.ContainsKey("salt"))
+            {
+                throw new Exception("Could not hash password properly.");
+            }
+
             var id = ObjectId.GenerateNewId(DateTime.Now).ToString();
             
             var account = new Account()
@@ -62,8 +84,8 @@ namespace OnlineTabletop.Accounts
                 _id = id,
                 name = registerBindingModel.Name,
                 email = registerBindingModel.Email,
-                salt = salt,
-                hash = hash
+                salt = hashDict["salt"],
+                hash = hashDict["hash"]
             };
             
             var bsonDoc = new BsonDocument();
@@ -100,6 +122,26 @@ namespace OnlineTabletop.Accounts
             }
 
             return account;
+        }
+
+        private Dictionary<string,string> HashPassword(string password)
+        {
+            var dict = new Dictionary<string, string>();
+            
+            var salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+            var hash = HashPassword(password, salt);
+
+            dict["salt"] = salt;
+            dict["hash"] = hash;
+
+            return dict;
+        }
+
+        private string HashPassword(string password, string salt)
+        {
+            string hash = BCrypt.Net.BCrypt.HashPassword(password + pepper, salt);
+
+            return hash;
         }
     }
 }
