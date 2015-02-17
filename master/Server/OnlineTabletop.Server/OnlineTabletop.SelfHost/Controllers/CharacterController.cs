@@ -23,7 +23,7 @@ namespace OnlineTabletop.Server.Controllers
         public IEnumerable<BasicCharacterDTO> Get(string playerId)
         {
             List<BasicCharacterDTO> characterDTOs = new List<BasicCharacterDTO>();
-            var characters = _characterRepository.GetCharactersByPlayerId(playerId);
+            var characters = _characterRepository.GetCharactersByPlayerName(playerId);
 
             if (characters != null)
             {
@@ -37,8 +37,8 @@ namespace OnlineTabletop.Server.Controllers
         }
 
         // GET: api/playerId/characterId/5
-        [Route("player/{playerId}/characters/{characterId}")]
-        public FullCharacterDTO Get(string playerId, string characterId)
+        [Route("player/{playerName}/characters/{characterId}")]
+        public FullCharacterDTO Get(string playerName, string characterId)
         {
             var resp = new HttpResponseMessage();
             try
@@ -51,7 +51,7 @@ namespace OnlineTabletop.Server.Controllers
                     resp.ReasonPhrase = "Character Not Found";
                     throw new HttpResponseException(resp);
                 }
-                if (character.PlayerId != playerId)
+                if (character.PlayerAccountName != playerName)
                 {
                     resp.StatusCode = HttpStatusCode.Conflict;
                     resp.Content = new StringContent(string.Format("Character found but is not associated with the given player Id"));
@@ -68,15 +68,15 @@ namespace OnlineTabletop.Server.Controllers
         }
 
         // POST: player/playerId/Character
-        [Route("player/{playerId}/character")]
-        public IHttpActionResult Post([FromBody]FullCharacterDTO fullCharacterDTO, string playerId)
+        [Route("player/{playerName}/character")]
+        public IHttpActionResult Post([FromBody]FullCharacterDTO fullCharacterDTO, string playerName)
         {
             if (ModelState.IsValid)
             {
                 var character = CharacterMapper.CharacterFromFullDTO(fullCharacterDTO);
                 if (!_characterRepository.Contains(character))
                 {
-                    character.PlayerId = playerId;
+                    character.PlayerAccountName = playerName;
                     _characterRepository.Add(character);
                     var basicDTO = CharacterMapper.BasicDTOFromCharacter(character);
                     return Ok(basicDTO);

@@ -2,6 +2,7 @@
 using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using OnlineTabletop.Models;
 using System;
@@ -14,38 +15,28 @@ namespace OnlineTabletop.Persistence
 {
     public class CharacterRepository : Repository<Character>, ICharacterRepository<Character>
     {
-        public IEnumerable<Character> GetCharactersByPlayerId(string playerId)
+        public IEnumerable<Character> GetCharactersByPlayerName(string playerName)
         {
             var characters = new HashSet<Character>();
             var database = client.GetServer().GetDatabase("tabletop");
-            var playerCollection = database.GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(Player)));
+            var playerColl = database.GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(Player)));
             
-            if (playerCollection == null)
+            if (playerColl == null)
             {
                 throw new Exception("No player collection in database");
             }
-            
-            var playerDoc = playerCollection.FindOneById(new ObjectId(playerId));
-            if (playerDoc == null)
+
+            var player = playerColl.AsQueryable<Player>().FirstOrDefault(x => x.AccountName == playerName);
+
+            if (player != null && player.CharacterIds != null)
             {
-                throw new ArgumentException("No player found with Id given.");
-            }
-            
-            var characterIdsVal = playerDoc.GetValue("characterIds", BsonValue.Create(new BsonArray()));
-            if (!characterIdsVal.IsBsonNull && characterIdsVal.IsBsonArray)
-            {
-                var characterIdsArray = characterIdsVal.AsBsonArray;
-                if (characterIdsArray.Count > 0)
+                var collection = database.GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(Character)));
+                foreach (var characterId in player.CharacterIds)
                 {
-                    var characterIds = characterIdsArray.ToList().Select(x => x.ToString());
-                    var collection = database.GetCollection(Util.Mongo.MongoUtilities.GetCollectionFromType(typeof(Character)));
-                    if (collection == null)
+                    var character = collection.AsQueryable<Character>().FirstOrDefault(x => x._id == characterId);
+                    if (character != null)
                     {
-                        throw new Exception("No characters in the database.");
-                    }
-                    foreach (var characterId in characterIds)
-                    {
-                        var characterDoc = collection.FindOneById(new ObjectId(characterId));
+                        characters.Add(character);
                     }
                 }
             }
@@ -68,7 +59,7 @@ namespace OnlineTabletop.Persistence
             {
                 throw new ArgumentException("Item already exists in collection.");
             }
-            if (string.IsNullOrWhiteSpace(item.PlayerId))
+            if (string.IsNullOrWhiteSpace(item.PlayerAccountName))
             {
                 throw new ArgumentException("A player Id is required for the character.");
             }
@@ -82,8 +73,10 @@ namespace OnlineTabletop.Persistence
 
             }
 
-            var playerDoc = playerColl.FindOneById(new ObjectId(item.PlayerId));
-            if (playerDoc == null)
+            var player = playerColl.AsQueryable<Player>().FirstOrDefault(x => x.AccountName == item.PlayerAccountName);
+
+            //var playerDoc = playerColl.FindOneById(new ObjectId(item.PlayerAccountName));
+            if (player == null)
             {
                 throw new Exception("No player found with Id specified.");
             }
@@ -97,23 +90,21 @@ namespace OnlineTabletop.Persistence
 
                 // character has been successfully saved. 
                 // now need to update the character ids of this player.
-                // code to update the player that got this character
-                var characterIdsVal = playerDoc.GetValue("characterIds", BsonValue.Create(new BsonArray()));
+                // code to update the player that got this character                
 
-                if (characterIdsVal.IsBsonNull)
+                if (player.CharacterIds == null)
                 {
-                    characterIdsVal = new BsonArray();
+                    player.CharacterIds = new List<string>();
                 }
 
-                if (!characterIdsVal.IsBsonArray)
-                {
-                    characterIdsVal = new BsonArray();
-                }
-                
-                var characterIdsArray = characterIdsVal.AsBsonArray;
-                var bsonIdVal = new BsonString(bsonId.ToString());
-                characterIdsArray.Add(bsonIdVal);
-                playerDoc.Set("characterIds", characterIdsArray);
+                player.CharacterIds.Add(bsonId.ToString());
+
+                var playerDoc = new BsonDocument();
+                var bsonDocumentWriterSettings = new BsonDocumentWriterSettings();
+                bsonDocumentWriterSettings.GuidRepresentation = GuidRepresentation.Standard;
+                var bsonDocumentWriter = new BsonDocumentWriter(playerDoc, bsonDocumentWriterSettings);
+                BsonSerializer.Serialize(bsonDocumentWriter, player);
+
                 var succeeded = playerColl.Save(playerDoc);
                 if (!succeeded.Ok)
                 {

@@ -41,7 +41,7 @@ namespace OnlineTabletop.Models
         /// <summary>
         /// The Player that this character belongs to.
         /// </summary>
-        public string PlayerId { get; set; }
+        public string PlayerAccountName { get; set; }
         #endregion
 
         #region Derived character properties

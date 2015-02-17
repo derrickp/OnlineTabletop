@@ -12,9 +12,11 @@ namespace OnlineTabletop.SelfHost
     {
         static void Main(string[] args)
         {
-            string baseAddress = "http://localhost:63096/"; 
+            string baseAddress = "http://localhost:63096/";
+            StartOptions startOptions = new StartOptions();
+            startOptions.Urls.Add(baseAddress);
 
-            using (WebApp.Start<Startup>(url: baseAddress))
+            using (WebApp.Start<Startup>(startOptions))
             {
                 // Create HttpCient and make a request to api/values 
                 //HttpClient client = new HttpClient();
@@ -26,6 +28,8 @@ namespace OnlineTabletop.SelfHost
                 }
 
             }
+
+            
             Console.ReadLine();
         }
     }

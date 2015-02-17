@@ -9,6 +9,6 @@ namespace OnlineTabletop.Models
     public interface ICharacterRepository<T>: IRepository<Character>
         where T:Character
     {
-        IEnumerable<Character> GetCharactersByPlayerId(string playerId);
+        IEnumerable<Character> GetCharactersByPlayerName(string playerId);
     }
 }

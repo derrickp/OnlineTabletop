@@ -11,7 +11,8 @@ using OnlineTabletop.SelfHost.Providers;
 using Owin;
 using System;
 using System.Reflection;
-using System.Web.Http; 
+using System.Web.Http;
+using System.Web.Http.Cors; 
 
 namespace OnlineTabletop.SelfHost
 {
@@ -30,6 +31,7 @@ namespace OnlineTabletop.SelfHost
             //);
 
             config.MapHttpAttributeRoutes();
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*", "X-Custom-Header"));
 
             var connectionString = "mongodb://localhost";
             var client = new MongoClient(connectionString);

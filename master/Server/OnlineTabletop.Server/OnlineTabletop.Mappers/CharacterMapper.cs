@@ -14,25 +14,30 @@ namespace OnlineTabletop.Mappers
         {
             var character = new Character();
             if (!string.IsNullOrWhiteSpace(fullCharacterDTO.id)) character._id = fullCharacterDTO.id;
-            if (!string.IsNullOrWhiteSpace(fullCharacterDTO.playerId)) character.PlayerId = fullCharacterDTO.playerId;
+            if (!string.IsNullOrWhiteSpace(fullCharacterDTO.playerAccountName)) character.PlayerAccountName = fullCharacterDTO.playerAccountName;
             character.Name = fullCharacterDTO.name;
             character.Race = fullCharacterDTO.race;
 
-            foreach (AbilityDTO abilityDTO in fullCharacterDTO.abilities)
+            if (fullCharacterDTO.abilities != null)
             {
-                var ability = AbilityMapper.GetAbilityFromDTO(abilityDTO);
-                character.Abilities.Add(ability);
+                foreach (AbilityDTO abilityDTO in fullCharacterDTO.abilities)
+                {
+                    var ability = AbilityMapper.GetAbilityFromDTO(abilityDTO);
+                    character.Abilities.Add(ability);
+                }
             }
 
             character.Size = fullCharacterDTO.size;
             character.SizeModifier = fullCharacterDTO.sizeModifier;
 
             character.Classes = new List<RpgClass>();
-
-            foreach (RpgClassDTO classDTO in fullCharacterDTO.classes)
+            if (fullCharacterDTO.classes != null)
             {
-                var rpgClass = RpgClassMapper.GetRpgClassFromDTO(classDTO);
-                character.Classes.Add(rpgClass);
+                foreach (RpgClassDTO classDTO in fullCharacterDTO.classes)
+                {
+                    var rpgClass = RpgClassMapper.GetRpgClassFromDTO(classDTO);
+                    character.Classes.Add(rpgClass);
+                }
             }
 
             return character;
@@ -42,7 +47,7 @@ namespace OnlineTabletop.Mappers
         {
             var characterDTO = new FullCharacterDTO();
             characterDTO.id = character._id;
-            characterDTO.playerId = character.PlayerId;
+            characterDTO.playerAccountName = character.PlayerAccountName;
             characterDTO.name = character.Name;
             characterDTO.race = character.Race;
 
@@ -70,7 +75,7 @@ namespace OnlineTabletop.Mappers
         {
             var characterDTO = new BasicCharacterDTO();
             characterDTO.id = character._id;
-            characterDTO.playerId = character.PlayerId;
+            characterDTO.playerAccountName = character.PlayerAccountName;
             characterDTO.name = character.Name;
             characterDTO.race = character.Race;
 
