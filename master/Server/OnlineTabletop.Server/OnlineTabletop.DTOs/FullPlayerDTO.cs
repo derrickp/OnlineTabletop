@@ -12,6 +12,10 @@ namespace OnlineTabletop.DTOs
 
         public string name { get; set; }
 
+        public string displayName { get; set; }
+
+        public DateTime joinDate { get; set; }
+
         public string email { get; set; }
 
         public IList<string> characterIds { get; set; }

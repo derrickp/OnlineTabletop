@@ -1,0 +1,10 @@
+<h2>login</h2>
+
+<form data-bind="submit: loginUser">
+    <label>Username:&nbsp;</label><input type="text" data-bind="value: userName, valueUpdate: 'keyup'" />
+    <label>Password:&nbsp;</label><input type="password" data-bind="value: password, valueUpdate: 'keyup'" />
+    <input type="submit" />
+</form>
+<div>
+    <span data-bind="text: validationError, visible: validationError"></span>
+</div>

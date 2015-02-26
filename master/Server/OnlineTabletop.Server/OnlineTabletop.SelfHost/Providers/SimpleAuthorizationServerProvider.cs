@@ -25,13 +25,13 @@ namespace OnlineTabletop.SelfHost.Providers
                 context.Rejected();
                 return;
             }
-
+            
             // create identity
             
             var id = new ClaimsIdentity(context.Options.AuthenticationType, context.UserName, "player");
             id.AddClaim(new Claim("userName", context.UserName));
             id.AddClaim(new Claim("role", "player"));
-
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
             context.Validated(id);
         }
 

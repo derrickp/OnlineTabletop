@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6B981F6F-0A6A-486E-8213-FA5623E5F2FE}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OnlineTabletop.Client</RootNamespace>
+    <AssemblyName>OnlineTabletop.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\app\require.config.js" />
+    <Content Include="src\bower_modules\components-bootstrap\.bower.json" />
+    <Content Include="src\bower_modules\components-bootstrap\.gitignore" />
+    <Content Include="src\bower_modules\components-bootstrap\bower.json" />
+    <Content Include="src\bower_modules\components-bootstrap\css\bootstrap-theme.css" />
+    <Content Include="src\bower_modules\components-bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="src\bower_modules\components-bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="src\bower_modules\components-bootstrap\css\bootstrap.css" />
+    <Content Include="src\bower_modules\components-bootstrap\css\bootstrap.css.map" />
+    <Content Include="src\bower_modules\components-bootstrap\css\bootstrap.min.css" />
+    <Content Include="src\bower_modules\components-bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="src\bower_modules\components-bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="src\bower_modules\components-bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="src\bower_modules\components-bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="src\bower_modules\components-bootstrap\js\bootstrap.js" />
+    <Content Include="src\bower_modules\components-bootstrap\js\bootstrap.min.js" />
+    <Content Include="src\bower_modules\components-bootstrap\less\alerts.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\badges.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\bootstrap.js" />
+    <Content Include="src\bower_modules\components-bootstrap\less\bootstrap.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\bootstrap.min.js" />
+    <Content Include="src\bower_modules\components-bootstrap\less\breadcrumbs.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\button-groups.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\buttons.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\carousel.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\close.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\code.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\component-animations.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\dropdowns.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\forms.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\glyphicons.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\grid.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\input-groups.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\jumbotron.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\labels.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\list-group.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\media.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\mixins.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\modals.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\navbar.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\navs.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\normalize.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\pager.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\pagination.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\panels.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\popovers.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\print.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\progress-bars.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\responsive-utilities.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\scaffolding.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\tables.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\theme.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\thumbnails.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\tooltip.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\type.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\utilities.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\variables.less" />
+    <Content Include="src\bower_modules\components-bootstrap\less\wells.less" />
+    <Content Include="src\bower_modules\components-bootstrap\README.md" />
+    <Content Include="src\bower_modules\crossroads\.bower.json" />
+    <Content Include="src\bower_modules\crossroads\.gitignore" />
+    <Content Include="src\bower_modules\crossroads\.jshintrc" />
+    <Content Include="src\bower_modules\crossroads\.npmignore" />
+    <Content Include="src\bower_modules\crossroads\.travis.yml" />
+    <Content Include="src\bower_modules\crossroads\build.js" />
+    <Content Include="src\bower_modules\crossroads\CHANGELOG.md" />
+    <Content Include="src\bower_modules\crossroads\dev\lib\signals.js" />
+    <Content Include="src\bower_modules\crossroads\dev\src\crossroads.js" />
+    <Content Include="src\bower_modules\crossroads\dev\src\intro.js" />
+    <Content Include="src\bower_modules\crossroads\dev\src\license.txt" />
+    <Content Include="src\bower_modules\crossroads\dev\src\pattern_lexer.js" />
+    <Content Include="src\bower_modules\crossroads\dev\src\route.js" />
+    <Content Include="src\bower_modules\crossroads\dev\src\wrapper.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\lib\jasmine\jasmine-html.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\lib\jasmine\jasmine.css" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\lib\jasmine\jasmine.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\lib\jasmine\MIT.LICENSE" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\add.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\create.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\dispose.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\interpolate.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\lexer.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\match.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\parse.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\pipe.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\remove.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\signals.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec\toString.spec.js" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec_runner-dev.html" />
+    <Content Include="src\bower_modules\crossroads\dev\tests\spec_runner-dist.html" />
+    <Content Include="src\bower_modules\crossroads\dist\crossroads.js" />
+    <Content Include="src\bower_modules\crossroads\dist\crossroads.min.js" />
+    <Content Include="src\bower_modules\crossroads\package.json" />
+    <Content Include="src\bower_modules\crossroads\README.md" />
+    <Content Include="src\bower_modules\crossroads\_assets\crossroads_logo.png" />
+    <Content Include="src\bower_modules\crossroads\_assets\crossroads_logo.svg" />
+    <Content Include="src\bower_modules\hasher\.bower.json" />
+    <Content Include="src\bower_modules\hasher\bower.json" />
+    <Content Include="src\bower_modules\hasher\CHANGELOG.md" />
+    <Content Include="src\bower_modules\hasher\dist\docs\files.html" />
+    <Content Include="src\bower_modules\hasher\dist\docs\index.html" />
+    <Content Include="src\bower_modules\hasher\dist\docs\static\default.css" />
+    <Content Include="src\bower_modules\hasher\dist\docs\static\hasher-logo.gif" />
+    <Content Include="src\bower_modules\hasher\dist\docs\symbolindex.html" />
+    <Content Include="src\bower_modules\hasher\dist\docs\symbols\hasher.html" />
+    <Content Include="src\bower_modules\hasher\dist\docs\symbols\src\_Users_millermedeiros_Projects__open_source_Hasher_dist_js_hasher.js.html" />
+    <Content Include="src\bower_modules\hasher\dist\docs\symbols\_global_.html" />
+    <Content Include="src\bower_modules\hasher\dist\js\hasher.js" />
+    <Content Include="src\bower_modules\hasher\dist\js\hasher.min.js" />
+    <Content Include="src\bower_modules\hasher\README.md" />
+    <Content Include="src\bower_modules\jquery\.bower.json" />
+    <Content Include="src\bower_modules\jquery\bower.json" />
+    <Content Include="src\bower_modules\jquery\dist\jquery.js" />
+    <Content Include="src\bower_modules\jquery\dist\jquery.min.js" />
+    <Content Include="src\bower_modules\jquery\dist\jquery.min.map" />
+    <Content Include="src\bower_modules\jquery\MIT-LICENSE.txt" />
+    <Content Include="src\bower_modules\jquery\src\ajax.js" />
+    <Content Include="src\bower_modules\jquery\src\ajax\jsonp.js" />
+    <Content Include="src\bower_modules\jquery\src\ajax\load.js" />
+    <Content Include="src\bower_modules\jquery\src\ajax\parseJSON.js" />
+    <Content Include="src\bower_modules\jquery\src\ajax\parseXML.js" />
+    <Content Include="src\bower_modules\jquery\src\ajax\script.js" />
+    <Content Include="src\bower_modules\jquery\src\ajax\var\nonce.js" />
+    <Content Include="src\bower_modules\jquery\src\ajax\var\rquery.js" />
+    <Content Include="src\bower_modules\jquery\src\ajax\xhr.js" />
+    <Content Include="src\bower_modules\jquery\src\attributes.js" />
+    <Content Include="src\bower_modules\jquery\src\attributes\attr.js" />
+    <Content Include="src\bower_modules\jquery\src\attributes\classes.js" />
+    <Content Include="src\bower_modules\jquery\src\attributes\prop.js" />
+    <Content Include="src\bower_modules\jquery\src\attributes\support.js" />
+    <Content Include="src\bower_modules\jquery\src\attributes\val.js" />
+    <Content Include="src\bower_modules\jquery\src\callbacks.js" />
+    <Content Include="src\bower_modules\jquery\src\core.js" />
+    <Content Include="src\bower_modules\jquery\src\core\access.js" />
+    <Content Include="src\bower_modules\jquery\src\core\init.js" />
+    <Content Include="src\bower_modules\jquery\src\core\parseHTML.js" />
+    <Content Include="src\bower_modules\jquery\src\core\ready.js" />
+    <Content Include="src\bower_modules\jquery\src\core\var\rsingleTag.js" />
+    <Content Include="src\bower_modules\jquery\src\css.js" />
+    <Content Include="src\bower_modules\jquery\src\css\addGetHookIf.js" />
+    <Content Include="src\bower_modules\jquery\src\css\curCSS.js" />
+    <Content Include="src\bower_modules\jquery\src\css\defaultDisplay.js" />
+    <Content Include="src\bower_modules\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Content Include="src\bower_modules\jquery\src\css\support.js" />
+    <Content Include="src\bower_modules\jquery\src\css\swap.js" />
+    <Content Include="src\bower_modules\jquery\src\css\var\cssExpand.js" />
+    <Content Include="src\bower_modules\jquery\src\css\var\getStyles.js" />
+    <Content Include="src\bower_modules\jquery\src\css\var\isHidden.js" />
+    <Content Include="src\bower_modules\jquery\src\css\var\rmargin.js" />
+    <Content Include="src\bower_modules\jquery\src\css\var\rnumnonpx.js" />
+    <Content Include="src\bower_modules\jquery\src\data.js" />
+    <Content Include="src\bower_modules\jquery\src\data\accepts.js" />
+    <Content Include="src\bower_modules\jquery\src\data\Data.js" />
+    <Content Include="src\bower_modules\jquery\src\data\var\data_priv.js" />
+    <Content Include="src\bower_modules\jquery\src\data\var\data_user.js" />
+    <Content Include="src\bower_modules\jquery\src\deferred.js" />
+    <Content Include="src\bower_modules\jquery\src\deprecated.js" />
+    <Content Include="src\bower_modules\jquery\src\dimensions.js" />
+    <Content Include="src\bower_modules\jquery\src\effects.js" />
+    <Content Include="src\bower_modules\jquery\src\effects\animatedSelector.js" />
+    <Content Include="src\bower_modules\jquery\src\effects\Tween.js" />
+    <Content Include="src\bower_modules\jquery\src\event.js" />
+    <Content Include="src\bower_modules\jquery\src\event\ajax.js" />
+    <Content Include="src\bower_modules\jquery\src\event\alias.js" />
+    <Content Include="src\bower_modules\jquery\src\event\support.js" />
+    <Content Include="src\bower_modules\jquery\src\exports\amd.js" />
+    <Content Include="src\bower_modules\jquery\src\exports\global.js" />
+    <Content Include="src\bower_modules\jquery\src\intro.js" />
+    <Content Include="src\bower_modules\jquery\src\jquery.js" />
+    <Content Include="src\bower_modules\jquery\src\manipulation.js" />
+    <Content Include="src\bower_modules\jquery\src\manipulation\support.js" />
+    <Content Include="src\bower_modules\jquery\src\manipulation\var\rcheckableType.js" />
+    <Content Include="src\bower_modules\jquery\src\manipulation\_evalUrl.js" />
+    <Content Include="src\bower_modules\jquery\src\offset.js" />
+    <Content Include="src\bower_modules\jquery\src\outro.js" />
+    <Content Include="src\bower_modules\jquery\src\queue.js" />
+    <Content Include="src\bower_modules\jquery\src\queue\delay.js" />
+    <Content Include="src\bower_modules\jquery\src\selector-native.js" />
+    <Content Include="src\bower_modules\jquery\src\selector-sizzle.js" />
+    <Content Include="src\bower_modules\jquery\src\selector.js" />
+    <Content Include="src\bower_modules\jquery\src\serialize.js" />
+    <Content Include="src\bower_modules\jquery\src\sizzle\dist\sizzle.js" />
+    <Content Include="src\bower_modules\jquery\src\sizzle\dist\sizzle.min.js" />
+    <Content Include="src\bower_modules\jquery\src\sizzle\dist\sizzle.min.map" />
+    <Content Include="src\bower_modules\jquery\src\traversing.js" />
+    <Content Include="src\bower_modules\jquery\src\traversing\findFilter.js" />
+    <Content Include="src\bower_modules\jquery\src\traversing\var\rneedsContext.js" />
+    <Content Include="src\bower_modules\jquery\src\var\arr.js" />
+    <Content Include="src\bower_modules\jquery\src\var\class2type.js" />
+    <Content Include="src\bower_modules\jquery\src\var\concat.js" />
+    <Content Include="src\bower_modules\jquery\src\var\hasOwn.js" />
+    <Content Include="src\bower_modules\jquery\src\var\indexOf.js" />
+    <Content Include="src\bower_modules\jquery\src\var\pnum.js" />
+    <Content Include="src\bower_modules\jquery\src\var\push.js" />
+    <Content Include="src\bower_modules\jquery\src\var\rnotwhite.js" />
+    <Content Include="src\bower_modules\jquery\src\var\slice.js" />
+    <Content Include="src\bower_modules\jquery\src\var\strundefined.js" />
+    <Content Include="src\bower_modules\jquery\src\var\support.js" />
+    <Content Include="src\bower_modules\jquery\src\var\toString.js" />
+    <Content Include="src\bower_modules\jquery\src\wrap.js" />
+    <Content Include="src\bower_modules\js-signals\.bower.json" />
+    <Content Include="src\bower_modules\js-signals\bower.json" />
+    <Content Include="src\bower_modules\js-signals\CHANGELOG.md" />
+    <Content Include="src\bower_modules\js-signals\dist\docs\files.html" />
+    <Content Include="src\bower_modules\js-signals\dist\docs\index.html" />
+    <Content Include="src\bower_modules\js-signals\dist\docs\static\default.css" />
+    <Content Include="src\bower_modules\js-signals\dist\docs\symbolindex.html" />
+    <Content Include="src\bower_modules\js-signals\dist\docs\symbols\Signal.html" />
+    <Content Include="src\bower_modules\js-signals\dist\docs\symbols\SignalBinding.html" />
+    <Content Include="src\bower_modules\js-signals\dist\docs\symbols\signals.html" />
+    <Content Include="src\bower_modules\js-signals\dist\docs\symbols\_global_.html" />
+    <Content Include="src\bower_modules\js-signals\dist\signals.js" />
+    <Content Include="src\bower_modules\js-signals\dist\signals.min.js" />
+    <Content Include="src\bower_modules\js-signals\README.md" />
+    <Content Include="src\bower_modules\knockout-projections\.bower.json" />
+    <Content Include="src\bower_modules\knockout-projections\bower.json" />
+    <Content Include="src\bower_modules\knockout-projections\CONTRIBUTING.md" />
+    <Content Include="src\bower_modules\knockout-projections\dist\knockout-projections.js" />
+    <Content Include="src\bower_modules\knockout-projections\dist\knockout-projections.min.js" />
+    <Content Include="src\bower_modules\knockout-projections\Gruntfile.js" />
+    <Content Include="src\bower_modules\knockout-projections\package.json" />
+    <Content Include="src\bower_modules\knockout-projections\package.nuspec" />
+    <Content Include="src\bower_modules\knockout-projections\README.md" />
+    <Content Include="src\bower_modules\knockout-projections\src\knockout-projections.js" />
+    <Content Include="src\bower_modules\knockout\.bower.json" />
+    <Content Include="src\bower_modules\knockout\bower.json" />
+    <Content Include="src\bower_modules\knockout\build\fragments\amd-post.js" />
+    <Content Include="src\bower_modules\knockout\build\fragments\amd-pre.js" />
+    <Content Include="src\bower_modules\knockout\build\fragments\extern-post.js" />
+    <Content Include="src\bower_modules\knockout\build\fragments\extern-pre.js" />
+    <Content Include="src\bower_modules\knockout\build\fragments\source-references.js" />
+    <Content Include="src\bower_modules\knockout\build\knockout-raw.js" />
+    <Content Include="src\bower_modules\knockout\dist\knockout.debug.js" />
+    <Content Include="src\bower_modules\knockout\dist\knockout.js" />
+    <Content Include="src\bower_modules\knockout\Gruntfile.js" />
+    <Content Include="src\bower_modules\knockout\LICENSE" />
+    <Content Include="src\bower_modules\knockout\package.json" />
+    <Content Include="src\bower_modules\knockout\README.md" />
+    <Content Include="src\bower_modules\knockout\src\binding\bindingAttributeSyntax.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\bindingProvider.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\attr.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\checked.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\click.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\css.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\enableDisable.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\event.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\foreach.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\hasfocus.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\html.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\ifIfnotWith.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\options.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\selectedOptions.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\style.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\submit.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\text.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\textInput.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\uniqueName.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\value.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\defaultBindings\visible.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\editDetection\arrayToDomNodeChildren.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\editDetection\compareArrays.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\expressionRewriting.js" />
+    <Content Include="src\bower_modules\knockout\src\binding\selectExtensions.js" />
+    <Content Include="src\bower_modules\knockout\src\components\componentBinding.js" />
+    <Content Include="src\bower_modules\knockout\src\components\customElements.js" />
+    <Content Include="src\bower_modules\knockout\src\components\defaultLoader.js" />
+    <Content Include="src\bower_modules\knockout\src\components\loaderRegistry.js" />
+    <Content Include="src\bower_modules\knockout\src\google-closure-compiler-utils.js" />
+    <Content Include="src\bower_modules\knockout\src\memoization.js" />
+    <Content Include="src\bower_modules\knockout\src\namespace.js" />
+    <Content Include="src\bower_modules\knockout\src\subscribables\dependencyDetection.js" />
+    <Content Include="src\bower_modules\knockout\src\subscribables\dependentObservable.js" />
+    <Content Include="src\bower_modules\knockout\src\subscribables\extenders.js" />
+    <Content Include="src\bower_modules\knockout\src\subscribables\mappingHelpers.js" />
+    <Content Include="src\bower_modules\knockout\src\subscribables\observable.js" />
+    <Content Include="src\bower_modules\knockout\src\subscribables\observableArray.changeTracking.js" />
+    <Content Include="src\bower_modules\knockout\src\subscribables\observableArray.js" />
+    <Content Include="src\bower_modules\knockout\src\subscribables\subscribable.js" />
+    <Content Include="src\bower_modules\knockout\src\templating\jquery.tmpl\jqueryTmplTemplateEngine.js" />
+    <Content Include="src\bower_modules\knockout\src\templating\native\nativeTemplateEngine.js" />
+    <Content Include="src\bower_modules\knockout\src\templating\templateEngine.js" />
+    <Content Include="src\bower_modules\knockout\src\templating\templateRewriting.js" />
+    <Content Include="src\bower_modules\knockout\src\templating\templateSources.js" />
+    <Content Include="src\bower_modules\knockout\src\templating\templating.js" />
+    <Content Include="src\bower_modules\knockout\src\utils.domData.js" />
+    <Content Include="src\bower_modules\knockout\src\utils.domManipulation.js" />
+    <Content Include="src\bower_modules\knockout\src\utils.domNodeDisposal.js" />
+    <Content Include="src\bower_modules\knockout\src\utils.js" />
+    <Content Include="src\bower_modules\knockout\src\version.js" />
+    <Content Include="src\bower_modules\knockout\src\virtualElements.js" />
+    <Content Include="src\bower_modules\requirejs-text\.bower.json" />
+    <Content Include="src\bower_modules\requirejs-text\bower.json" />
+    <Content Include="src\bower_modules\requirejs-text\LICENSE" />
+    <Content Include="src\bower_modules\requirejs-text\package.json" />
+    <Content Include="src\bower_modules\requirejs-text\README.md" />
+    <Content Include="src\bower_modules\requirejs-text\text.js" />
+    <Content Include="src\bower_modules\requirejs\.bower.json" />
+    <Content Include="src\bower_modules\requirejs\bower.json" />
+    <Content Include="src\bower_modules\requirejs\README.md" />
+    <Content Include="src\bower_modules\requirejs\require.js" />
+    <Content Include="src\components\about-page\about.html" />
+    <Content Include="src\components\characters\characters.html" />
+    <Content Include="src\components\home-page\home.html" />
+    <Content Include="src\components\login\login.html" />
+    <Content Include="src\components\nav-bar\nav-bar.html" />
+    <Content Include="src\components\user-info\user-info.html" />
+    <Content Include="src\css\styles.css" />
+    <Content Include="src\index.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="definitions\bootstrap\bootstrap.d.ts" />
+    <TypeScriptCompile Include="definitions\crossroads\crossroads.d.ts" />
+    <TypeScriptCompile Include="definitions\hasher\hasher.d.ts" />
+    <TypeScriptCompile Include="definitions\jasmine\jasmine.d.ts" />
+    <TypeScriptCompile Include="definitions\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="definitions\js-signals\js-signals.d.ts" />
+    <TypeScriptCompile Include="definitions\knockout-projections\knockout-projections.d.ts" />
+    <TypeScriptCompile Include="definitions\knockout\knockout-3.2.0.d.ts" />
+    <TypeScriptCompile Include="definitions\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="src\app\router.ts" />
+    <TypeScriptCompile Include="src\app\startup.ts" />
+    <TypeScriptCompile Include="src\components\characters\characters.ts" />
+    <TypeScriptCompile Include="src\components\home-page\home.ts" />
+    <TypeScriptCompile Include="src\components\login\login.ts" />
+    <TypeScriptCompile Include="src\components\nav-bar\nav-bar.ts" />
+    <TypeScriptCompile Include="src\components\user-info\user-info.ts" />
+    <TypeScriptCompile Include="src\local_modules\user-manager\user-manager.ts" />
+    <TypeScriptCompile Include="src\models\player-dtos.ts" />
+    <TypeScriptCompile Include="src\references.d.ts" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptModuleKind>amd</TypeScriptModuleKind>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60348</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:60348/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

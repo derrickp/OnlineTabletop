@@ -1,7 +1,6 @@
 master/Server/OnlineTabletop.Server/OnlineTabletop.Server.v12.suo
 master/Server/OnlineTabletop.Server/OnlineTabletop.Server/bin
 master/Server/OnlineTabletop.Server/OnlineTabletop.Server/obj
-master/Server/OnlineTabletop.Server/OnlineTabletop.Server/OnlineTabletop.Server.csproj.user
 master/Server/OnlineTabletop.Server/packages
 master/Server/OnlineTabletop.Server/OnlineTabletop.Models/obj
 master/Server/OnlineTabletop.Server/OnlineTabletop.Models/bin
@@ -19,3 +18,6 @@ master/Server/OnlineTabletop.Server/OnlineTabletop.Accounts/bin
 master/Server/OnlineTabletop.Server/OnlineTabletop.Accounts/obj
 master/Server/OnlineTabletop.Server/OnlineTabletop.SelfHost/bin
 master/Server/OnlineTabletop.Server/OnlineTabletop.SelfHost/obj
+master/Client/OnlineTabletop.Client/OnlineTabletop.Client/bin
+master/Client/OnlineTabletop.Client/OnlineTabletop.Client/obj
+*.user

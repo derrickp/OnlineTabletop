@@ -1,0 +1,31 @@
+﻿import ko = require("knockout");
+
+export var User: KnockoutObservable<UserInfo> = ko.observable(new UserInfo());
+
+export class UserInfo {
+    public name: KnockoutObservable<string> = ko.observable("");
+}
+
+export function getUserToken(): string {
+    if (localStorage && localStorage.getItem("userInfo")) {
+        var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+    }
+    return "";
+}
+
+export function setUserInfo(data) {
+
+}
+
+export function initialize() {
+    // In here we have to check whether or not the token has expired. If it has, we'd need to refresh the token.
+    if (localStorage && localStorage.getItem("userInfo")) {
+        var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        User(userInfo);
+    }
+}
+
+interface tokenData {
+
+}

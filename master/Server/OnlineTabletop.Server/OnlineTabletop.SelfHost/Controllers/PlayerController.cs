@@ -27,7 +27,7 @@ namespace OnlineTabletop.Server.Controllers
             if (player != null)
             {
                 BasicPlayerDTO playerDto = new BasicPlayerDTO(){
-                    id = player._id,
+                    _id = player._id,
                     name = player.AccountName,
                     email = player.Email
                 };
@@ -38,6 +38,51 @@ namespace OnlineTabletop.Server.Controllers
                 return NotFound();
             }
             
+        }
+
+        [Route("info")]
+        [HttpGet]
+        [ResponseType(typeof(FullPlayerDTO))]
+        public IHttpActionResult Get()
+        {
+            var principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
+
+            if (principal == null)
+            {
+                return BadRequest();
+                
+            }
+
+            var accountNameClaim = principal.Claims.FirstOrDefault(x => x.Type == "userName");
+            if (accountNameClaim == null)
+            {
+                return BadRequest();
+            }
+
+            var playerName = accountNameClaim.Value.ToString();
+            if (string.IsNullOrWhiteSpace(playerName))
+            {
+                return BadRequest();
+            }
+
+            Player player = _playerRepository.GetByAccountName(playerName);
+            if (player != null)
+            {
+                var playerDto = new FullPlayerDTO()
+                {
+                    _id = player._id,
+                    name = player.AccountName,
+                    email = player.Email,
+                    joinDate = player.JoinDate,
+                    displayName = player.DisplayName
+                };
+                return Ok(playerDto);
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
 
         // POST: api/Player
@@ -65,7 +110,7 @@ namespace OnlineTabletop.Server.Controllers
                     {
                         return Ok(new BasicPlayerDTO()
                         {
-                            id = player._id,
+                            _id = player._id,
                             name = player.AccountName,
                             email = player.Email
                         });

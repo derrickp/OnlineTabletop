@@ -9,12 +9,16 @@ namespace OnlineTabletop.DTOs
 {
     public class BasicPlayerDTO
     {
-        public string id { get; set; }
+        public string _id { get; set; }
 
         [Required]
         public string name { get; set; }
 
         [Required]
         public string email { get; set; }
+
+        public string displayName { get; set; }
+
+        public DateTime joinDate { get; set; }
     }
 }

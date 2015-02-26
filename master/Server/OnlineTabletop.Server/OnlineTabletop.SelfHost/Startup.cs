@@ -32,7 +32,7 @@ namespace OnlineTabletop.SelfHost
 
             config.MapHttpAttributeRoutes();
             config.EnableCors(new EnableCorsAttribute("*", "*", "*", "X-Custom-Header"));
-
+            
             var connectionString = "mongodb://localhost";
             var client = new MongoClient(connectionString);
 
@@ -40,7 +40,6 @@ namespace OnlineTabletop.SelfHost
                 {
                     // for demo purposes
                     AllowInsecureHttp = true,
-
                     TokenEndpointPath = new PathString("/token"),
                     AccessTokenExpireTimeSpan = TimeSpan.FromHours(8),
 

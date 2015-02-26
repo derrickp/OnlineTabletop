@@ -30,7 +30,7 @@ namespace OnlineTabletop.SelfHost
             }
 
             
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }
