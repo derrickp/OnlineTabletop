@@ -2,10 +2,10 @@
 
 import ko = require("knockout");
 import $ = require("jquery");
-import dto = require("../../models/player-dtos");
+import playerDto = require("../../models/player-dtos");
 
 export class UserInfo {
-    _dto: dto.basicPlayerDTO;
+    _dto: playerDto.basicPlayerDTO;
     public name: KnockoutObservable<string> = ko.observable("");
     public email: KnockoutObservable<string> = ko.observable("");
     public joinDateFormat: KnockoutObservable<string> = ko.observable("");
@@ -13,7 +13,7 @@ export class UserInfo {
     public isAuthenticated: KnockoutObservable<boolean> = ko.observable(false);
     _id: string;
 
-    constructor(playerDTO?: dto.basicPlayerDTO) {
+    constructor(playerDTO?: playerDto.basicPlayerDTO) {
         if (playerDTO) {
             this._dto = playerDTO;
             this._id = playerDTO.id;
@@ -53,10 +53,23 @@ export function setData(data: TokenData) {
     }
 }
 
-export function setUserInfo(playerDTO: dto.basicPlayerDTO) {
+export function setUserInfo(playerDTO: playerDto.basicPlayerDTO) {
     var userInfo = new UserInfo(playerDTO);
     userInfo.isAuthenticated(true);
     User(userInfo);
+}
+
+export function getCharacters(): JQueryXHR {
+    var data: TokenData = JSON.parse(localStorage.getItem("tokenData"));
+    
+    var deferred = $.ajax("http://localhost:63096/characters", {
+        beforeSend: (xhr: JQueryXHR) => {
+            xhr.setRequestHeader("Authorization", "Bearer " + data.access_token);
+        },
+        accepts: "json"
+    });
+
+    return deferred;
 }
 
 function _getUserInfo(data: TokenData) {
@@ -65,7 +78,7 @@ function _getUserInfo(data: TokenData) {
             xhr.setRequestHeader("Authorization", "Bearer " + data.access_token);
         },
         accepts: "json",
-        success: (result: dto.basicPlayerDTO) => {
+        success: (result: playerDto.basicPlayerDTO) => {
             if (result) {
                 setUserInfo(result);
             }

@@ -18,11 +18,11 @@ namespace OnlineTabletop.DTOs
 
         public string email { get; set; }
 
-        public IList<string> characterIds { get; set; }
+        public IList<BasicCharacterDTO> basicCharacters { get; set; }
 
         public FullPlayerDTO()
         {
-            characterIds = new List<string>();
+            basicCharacters = new List<BasicCharacterDTO>();
         }
     }
 }

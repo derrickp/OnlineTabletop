@@ -1,13 +1,36 @@
 /// <amd-dependency path="text!./characters.html" />
+
 import ko = require("knockout");
+import um = require("../../local_modules/user-manager/user-manager");
+import characterDto = require("../../models/character-dtos");
+import characterInfo = require("../../local_modules/character-info/character-info");
 export var template: string = require("text!./characters.html");
 
 export class viewModel {
 
-    public message = ko.observable("Hello from the characters component!");
+    characters: KnockoutObservableArray<characterInfo.character> = ko.observableArray([]);
 
-    constructor (params: any) {
+    constructor(params: any) {
 
+        var self = this;
+        if (um && um.User && um.User().isAuthenticated && !um.User().isAuthenticated()) {
+            window.location.hash = 'login';
+        }
+
+        um.getCharacters().done((results: Array<characterDto.basicCharacterDTO>) => {
+            if (results) {
+                results.forEach((value: characterDto.basicCharacterDTO) => {
+                    var character = new characterInfo.character(value);
+                    this.characters.push(character);
+                });
+            }
+        }).fail((error) => {
+
+        });
+    }
+
+    selectCharacter(args) {
+        debugger;
     }
 
     public dispose() {

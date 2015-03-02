@@ -24,6 +24,11 @@ ko.components.register('characters', { require: 'components/characters/character
 
 
 
+ko.components.register('basic-character', { require: 'components/basic-character/basic-character' });
+
+
+
+
 // [Scaffolded component registrations will be inserted here. To retain this feature, don't remove this comment.]
 
 um.initialize();

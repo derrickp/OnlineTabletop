@@ -8,7 +8,6 @@ export class viewModel {
     public user = um.User;
 
     constructor (params: any) {
-        debugger;
         if (um && um.User && um.User().isAuthenticated && !um.User().isAuthenticated()) {
             window.location.hash = 'login';
         }

@@ -22,7 +22,8 @@ module router {
         { url: '', params: { page: 'home-page' } },
         { url: 'about', params: { page: 'about-page' } },
         { url: 'login', params: { page: 'login' } },
-        { url: 'userinfo', params: { page: 'user-info' } }
+        { url: 'userinfo', params: { page: 'user-info' } },
+        { url: 'characters', params: { page: 'characters' } }
     ];
 
     // Register routes with crossroads.js

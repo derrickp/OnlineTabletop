@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -34,6 +35,50 @@ namespace OnlineTabletop.Server.Controllers
                 }
             }
             return characterDTOs;
+        }
+
+        // GET: api/characters
+        // Get the characters belonging to a certain player.
+        [Route("characters")]
+        [HttpGet]
+        [ResponseType(typeof(IEnumerable<BasicCharacterDTO>))]
+        public IHttpActionResult Get()
+        {
+            var principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
+
+            if (principal == null)
+            {
+                return BadRequest();
+
+            }
+
+            var accountNameClaim = principal.Claims.FirstOrDefault(x => x.Type == "userName");
+            if (accountNameClaim == null)
+            {
+                return BadRequest();
+            }
+
+            var playerName = accountNameClaim.Value.ToString();
+            if (string.IsNullOrWhiteSpace(playerName))
+            {
+                return BadRequest();
+            }
+
+            var characters = _characterRepository.GetCharactersByPlayerName(playerName);
+
+            List<BasicCharacterDTO> characterDTOs = new List<BasicCharacterDTO>();
+            if (characters != null)
+            {
+                foreach (var character in characters)
+                {
+                    var basicDTO = CharacterMapper.BasicDTOFromCharacter(character);
+                    if (basicDTO != null)
+                    {
+                        characterDTOs.Add(basicDTO);
+                    }
+                }
+            }
+            return Ok(characterDTOs);
         }
 
         // GET: api/playerId/characterId/5

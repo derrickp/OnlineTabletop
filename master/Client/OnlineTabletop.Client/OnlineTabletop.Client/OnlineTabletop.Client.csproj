@@ -360,6 +360,7 @@
     <Content Include="src\bower_modules\requirejs\README.md" />
     <Content Include="src\bower_modules\requirejs\require.js" />
     <Content Include="src\components\about-page\about.html" />
+    <Content Include="src\components\basic-character\basic-character.html" />
     <Content Include="src\components\characters\characters.html" />
     <Content Include="src\components\home-page\home.html" />
     <Content Include="src\components\login\login.html" />
@@ -392,13 +393,17 @@
     <TypeScriptCompile Include="definitions\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="src\app\router.ts" />
     <TypeScriptCompile Include="src\app\startup.ts" />
+    <TypeScriptCompile Include="src\components\basic-character\basic-character.ts" />
     <TypeScriptCompile Include="src\components\characters\characters.ts" />
     <TypeScriptCompile Include="src\components\home-page\home.ts" />
     <TypeScriptCompile Include="src\components\login\login.ts" />
     <TypeScriptCompile Include="src\components\nav-bar\nav-bar.ts" />
     <TypeScriptCompile Include="src\components\user-info\user-info.ts" />
+    <TypeScriptCompile Include="src\local_modules\character-info\character-info.ts" />
     <TypeScriptCompile Include="src\local_modules\user-manager\user-manager.ts" />
+    <TypeScriptCompile Include="src\models\character-dtos.ts" />
     <TypeScriptCompile Include="src\models\player-dtos.ts" />
+    <TypeScriptCompile Include="src\models\rpgClass-dtos.ts" />
     <TypeScriptCompile Include="src\references.d.ts" />
   </ItemGroup>
   <ItemGroup />

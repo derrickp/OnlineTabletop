@@ -1,3 +1,7 @@
 <h2>characters</h2>
 
-<p data-bind='text: message'></p>
+<div data-bind="foreach: characters">
+    <a data-bind="click: $parent.selectCharacter">
+        <basic-character params="character: $data"></basic-character>
+    </a>
+</div>
