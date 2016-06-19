@@ -360,6 +360,7 @@
     <Content Include="src\bower_modules\requirejs\README.md" />
     <Content Include="src\bower_modules\requirejs\require.js" />
     <Content Include="src\components\about-page\about.html" />
+    <Content Include="src\components\characters\characters.css" />
     <Content Include="src\components\basic-character\basic-character.html" />
     <Content Include="src\components\characters\characters.html" />
     <Content Include="src\components\home-page\home.html" />

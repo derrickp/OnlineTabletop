@@ -1,7 +1,14 @@
+<link href="components/characters/characters.css" rel="stylesheet" />
+
 <h2>characters</h2>
 
 <div data-bind="foreach: characters">
-    <a data-bind="click: $parent.selectCharacter">
+    <div>
+        <button class="character-button" data-bind="click: $parent.selectCharacter">
+            <basic-character params="character: $data"></basic-character>
+        </button>
+    </div>
+    <!--<a data-bind="click: $parent.selectCharacter">
         <basic-character params="character: $data"></basic-character>
-    </a>
+    </a>-->
 </div>

@@ -24,7 +24,7 @@ export class viewModel {
                     this.characters.push(character);
                 });
             }
-        }).fail((error) => {
+        }).fail((error: Error) => {
 
         });
     }

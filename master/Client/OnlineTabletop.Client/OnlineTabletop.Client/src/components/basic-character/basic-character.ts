@@ -1,10 +1,16 @@
 /// <amd-dependency path="text!./basic-character.html" />
 import ko = require("knockout");
+import characterInfo = require("../../local_modules/character-info/character-info");
 export var template: string = require("text!./basic-character.html");
 
 export class viewModel {
-    
-    constructor (params: any) {
+
+    character: KnockoutObservable<characterInfo.character>;
+
+    constructor(params: any) {
+        if (params.character) {
+            this.character = params.character;
+        }
         debugger;
     }
 
